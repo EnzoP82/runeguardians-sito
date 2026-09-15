@@ -249,7 +249,7 @@
           <input type="email" id="email" name="email" placeholder="nome@esempio.com" required autocomplete="email">
           <button type="submit">Avvisami al lancio</button>
         </div>
-        <p class="promessa">Chi è in lista riceve il link della campagna un'ora prima del lancio pubblico.</p>
+        <p class="promessa">Chi è in lista riceve subito l'accesso all'area riservata «Il Mondo di RuneGuardians» — e il link della campagna un'ora prima del lancio pubblico.</p>
         <p class="esito" role="status"></p>
       </form>
     </div>
@@ -309,6 +309,7 @@
     <h2>Un'ora di vantaggio. Cento copie numerate.</h2>
     <p>Il tier <strong>Founder's Circle</strong> esiste in 100 copie: Numero 1 con copertina variant esclusiva, numerata da 1 a 100, e il tuo nome nei ringraziamenti ufficiali. Quando finiscono, finiscono.</p>
     <p>Chi è iscritto alla lista <strong>riceve il link della campagna un'ora prima del lancio pubblico</strong>, insieme all'orario esatto di apertura. Quando la campagna apre — nello stesso istante per tutti, così funziona Kickstarter — tu hai già il link in casella e sai al secondo quando cliccare. È così che si prende una copia numerata: arrivando per primi.</p>
+    <p>E il primo regalo arriva subito: nella email di benvenuto trovi l'accesso all'area riservata <strong>«Il Mondo di RuneGuardians»</strong> — i Guardiani ratificati nel canone, i luoghi di Astralis, le tavole d'evoluzione delle Armature. Solo per chi è in lista.</p>
 
     <form class="iscrizione" data-secondo novalidate>
       <label for="email2">La tua email</label>
@@ -360,7 +361,7 @@
       dati.append("ml-submit", "1");
       fetch(MAILERLITE_ACTION, { method: "POST", body: dati, mode: "no-cors" })
         .then(function () {
-          esito.textContent = "Fatto, sei in lista. Controlla la casella: c'è una email di conferma ad aspettarti. Il link della campagna arriverà un'ora prima del lancio.";
+          esito.textContent = "Fatto, sei in lista. Controlla la casella: nella email di benvenuto trovi l'accesso al Mondo di RuneGuardians, e il link della campagna arriverà un'ora prima del lancio.";
           esito.classList.add("visibile");
           form.reset();
         })
