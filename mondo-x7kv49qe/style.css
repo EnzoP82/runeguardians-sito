@@ -130,6 +130,31 @@ footer { text-align:center; color:var(--nota); font-size:.85rem;
          padding:2.5rem 1.5rem; background:#081019; margin-top:3rem; }
 footer a { color:var(--oro); }
 
+/* Il viaggio a sblocchi: tappe chiuse col lucchetto, la prossima in oro. */
+.tenda a.bloccata, .tappa-hub.bloccata { opacity:.4; cursor:not-allowed; }
+.tenda a.bloccata::after { content:" \1F512"; font-size:.75em; }
+.tappa-hub.bloccata .tappa-nome::after { content:" \1F512"; font-size:.8em; }
+.tappa-hub.bloccata:hover { transform:none; box-shadow:none; }
+.tenda a.prossima { color:var(--oro); }
+.tenda a.prossima::before { content:"\25C6 "; font-size:.7em;
+  vertical-align:.12em; }
+.tappa-hub.prossima { border-color:rgba(201,163,90,.8);
+  box-shadow:0 0 26px rgba(201,163,90,.22); }
+.tappa-hub.prossima .tappa-nome { color:var(--oro); }
+.tappa-hub.prossima .tappa-nome::before { content:"\25C6 "; font-size:.7em;
+  vertical-align:.12em; }
+@media (prefers-reduced-motion: no-preference) {
+  .tenda a.prossima::before, .tappa-hub.prossima .tappa-nome::before {
+    animation:brilla 2.6s ease-in-out infinite; display:inline-block; }
+  @keyframes brilla { 0%,100% { opacity:.5; } 50% { opacity:1; } }
+  .scrollone { animation:scrollone .4s ease; }
+  @keyframes scrollone {
+    0%,100% { transform:translateX(0); }
+    25% { transform:translateX(-.35rem); }
+    60% { transform:translateX(.3rem); }
+  }
+}
+
 /* Il respiro del Mondo: entrate in scena e transizioni tra pagine. */
 .mappa-fondale { position:fixed; inset:-6%; z-index:-1; opacity:.09;
   background:url("../assets/mappa-astralis.jpg") center/cover no-repeat;

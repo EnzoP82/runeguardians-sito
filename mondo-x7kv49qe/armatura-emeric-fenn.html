@@ -21,7 +21,7 @@
   </button>
 </header>
 <nav class="tenda" hidden>
-  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html' class=qui>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
 </nav>
 
 <main class="scheda">
@@ -66,6 +66,69 @@
       });
     }, { threshold: 0.05 }).observe(scena);
   }
+
+  // Il viaggio a sblocchi: ogni area vista apre la successiva (per utente,
+  // nella memoria del browser). La prossima tappa e' in evidenza, le
+  // altre portano il lucchetto.
+  (function () {
+    var ORDINE = ["index.html", "astralis.html", "luoghi.html",
+                  "guardiani.html", "volti.html", "armature.html",
+                  "numero1.html"];
+    var CHIAVE = "rg-mondo-viaggio";
+    if (location.hash === "#ricomincia") { // per demo: riparte da capo
+      try { localStorage.removeItem(CHIAVE); } catch (e) {}
+    }
+    var qui = "armature.html";
+    var idxQui = ORDINE.indexOf(qui);
+    var visti;
+    try { visti = JSON.parse(localStorage.getItem(CHIAVE) || "[]"); }
+    catch (e) { visti = []; }
+    if (!Array.isArray(visti)) visti = [];
+
+    function limite() { // l'ultima tappa raggiungibile
+      var m = -1;
+      visti.forEach(function (i) { if (i > m) m = i; });
+      return Math.min(ORDINE.length - 1, m + 1);
+    }
+
+    if (idxQui >= 0) {
+      if (idxQui > limite()) { // tappa ancora chiusa: si torna al viaggio
+        location.replace(ORDINE[limite()]);
+        return;
+      }
+      if (visti.indexOf(idxQui) < 0) {
+        visti.push(idxQui);
+        try { localStorage.setItem(CHIAVE, JSON.stringify(visti)); }
+        catch (e) {}
+      }
+    }
+
+    var aperteFinoA = limite();
+    var prossima = -1;
+    for (var i = 0; i < ORDINE.length; i++) {
+      if (visti.indexOf(i) < 0) { prossima = i; break; }
+    }
+
+    function decora(link) {
+      var pagina = link.getAttribute("href");
+      var i = ORDINE.indexOf(pagina);
+      if (i < 0) return;
+      if (i > aperteFinoA) {
+        link.classList.add("bloccata");
+        link.setAttribute("aria-disabled", "true");
+        link.title = "Prosegui il viaggio per sbloccare questa tappa";
+        link.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          link.classList.remove("scrollone");
+          void link.offsetWidth;
+          link.classList.add("scrollone");
+        });
+      } else if (i === prossima && i !== idxQui) {
+        link.classList.add("prossima");
+      }
+    }
+    document.querySelectorAll(".tenda a, .tappa-hub").forEach(decora);
+  })();
 </script>
 </body>
 </html>
