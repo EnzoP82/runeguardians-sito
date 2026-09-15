@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RuneGuardians — Il Peso del Ritorno</title>
+<meta name="description" content="Astralis ha dimenticato. Cinque Eredi devono ricordare. Il primo albo di RuneGuardians, 48 tavole già illustrate e letterate, arriva su Kickstarter a novembre 2026.">
+<meta property="og:title" content="RuneGuardians — Il Peso del Ritorno">
+<meta property="og:description" content="48 tavole già pronte. Su Kickstarter a novembre 2026. Iscriviti: il link della campagna arriva un'ora prima del lancio.">
+<meta property="og:image" content="assets/cover-fronte.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --abisso: #0B131E;
+    --fondale: #13202E;
+    --carta: #E9E1CC;
+    --carta-nota: #A79E8C; /* pergamena attenuata per note e microcopy */
+    --oro: #C9A35A;
+    --oro-chiaro: #E3C98F;
+    --runa: #35B6E8;
+    --brace: #A94036;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--abisso);
+    color: var(--carta);
+    font-family: "Alegreya", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+  }
+  ::selection { background: var(--runa); color: var(--abisso); }
+  a { color: var(--runa); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--oro-chiaro); }
+  :focus-visible { outline: 2px solid var(--runa); outline-offset: 3px; border-radius: 2px; }
+
+  h2 {
+    font-family: "Cinzel", serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+    line-height: 1.25;
+    color: var(--oro);
+    letter-spacing: .01em;
+    margin-bottom: 1.1rem;
+  }
+  p + p { margin-top: 1em; }
+
+  /* Il divisore di sezione: la linea col diamante, presa dal wordmark. */
+  .runa-divisore {
+    display: flex; align-items: center; gap: .8rem;
+    max-width: 21rem; margin: 4.5rem auto;
+    color: var(--oro); opacity: .65;
+  }
+  .runa-divisore::before, .runa-divisore::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--oro));
+  }
+  .runa-divisore::after { background: linear-gradient(90deg, var(--oro), transparent); }
+  .runa-divisore svg { flex: none; }
+
+  /* ------------------------------------------------------------ hero --- */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+    background:
+      linear-gradient(100deg, rgba(11,19,30,.93) 30%, rgba(11,19,30,.42) 58%, rgba(11,19,30,.08)),
+      url("assets/retro-abisso.jpg") right 28% / cover no-repeat;
+  }
+  .hero::after { /* il fondo della pagina sale dall'abisso */
+    content: ""; position: absolute; inset: auto 0 0 0; height: 9rem;
+    background: linear-gradient(transparent, var(--abisso));
+  }
+  .hero-interno {
+    position: relative; z-index: 1;
+    width: min(72rem, 100%);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 6rem;
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: 3rem; align-items: center;
+  }
+  .hero-lockup { width: min(15rem, 52vw); height: auto; margin-bottom: 2.2rem; }
+  .hero h1 {
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.18;
+    max-width: 15em;
+  }
+  /* La parola erosa: la memoria che torna. Un solo momento, al caricamento. */
+  .erosa span { display: inline-block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .erosa span {
+      animation: ricordo 2.6s cubic-bezier(.2,.6,.25,1) both;
+      animation-delay: calc(.55s + var(--i) * .12s);
+    }
+    @keyframes ricordo {
+      0%   { opacity: 0; filter: blur(6px); transform: translateY(.06em); }
+      60%  { opacity: .55; filter: blur(1.5px); }
+      100% { opacity: 1; filter: blur(0); transform: none; }
+    }
+  }
+  .hero-sotto {
+    margin-top: 1.2rem;
+    font-size: 1.12rem;
+    color: var(--carta);
+    max-width: 34em;
+  }
+  .hero-sotto em { color: var(--oro-chiaro); font-style: italic; }
+
+  .albo {
+    justify-self: center;
+    width: min(20rem, 78vw);
+    transform: rotate(2.5deg);
+  }
+  .albo img {
+    display: block; width: 100%; height: auto; border-radius: 3px;
+    border: 1px solid rgba(201,163,90,.35);
+    box-shadow: 0 22px 55px rgba(0,0,0,.65), 0 4px 14px rgba(0,0,0,.5);
+  }
+  .albo figcaption {
+    text-align: center; font-size: .85rem; color: var(--carta-nota);
+    padding-top: .7rem; font-style: italic;
+  }
+
+  /* ------------------------------------------------------------ form --- */
+  .iscrizione { margin-top: 2rem; max-width: 30rem; }
+  .iscrizione label { display: block; font-size: .95rem; color: var(--carta-nota); margin-bottom: .4rem; }
+  .iscrizione-riga { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .iscrizione input[type="email"] {
+    flex: 1 1 14rem;
+    font: inherit; font-size: 1rem;
+    color: var(--carta);
+    background: rgba(19,32,46,.85);
+    border: 1px solid rgba(201,163,90,.45);
+    border-radius: 3px;
+    padding: .8rem 1rem;
+  }
+  .iscrizione input[type="email"]::placeholder { color: var(--carta-nota); opacity: .8; }
+  .iscrizione input[type="email"]:focus { border-color: var(--runa); outline: none;
+    box-shadow: 0 0 0 1px var(--runa), 0 0 18px rgba(53,182,232,.25); }
+  .iscrizione button {
+    font-family: "Cinzel", serif; font-weight: 600; font-size: .95rem;
+    letter-spacing: .04em;
+    color: var(--abisso);
+    background: linear-gradient(170deg, var(--oro-chiaro), var(--oro));
+    border: none; border-radius: 3px;
+    padding: .8rem 1.5rem;
+    cursor: pointer;
+  }
+  .iscrizione button:hover { background: linear-gradient(170deg, #F0DCA8, var(--oro-chiaro)); }
+  .promessa { margin-top: .8rem; font-size: .95rem; color: var(--carta-nota); }
+  .esito { margin-top: .9rem; font-size: 1rem; color: var(--runa); display: none; }
+  .esito.visibile { display: block; }
+
+  /* --------------------------------------------------------- sezioni --- */
+  section { padding: 0 1.5rem; }
+  .colonna { max-width: 44rem; margin: 0 auto; }
+
+  .mondo p { font-size: 1.08rem; }
+  .mondo .cancella { color: var(--brace); font-weight: 700; }
+  .tagline {
+    margin-top: 2.6rem;
+    text-align: center;
+    font-style: italic; font-weight: 500;
+    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+    color: var(--oro-chiaro);
+  }
+
+  .banda-eredi {
+    margin: 4.5rem auto 0;
+    max-width: 62rem;
+    padding: 0 1.5rem;
+  }
+  .banda-eredi img {
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 16 / 8; object-fit: cover; object-position: 50% 44%;
+    border: 1px solid rgba(201,163,90,.25); border-radius: 3px;
+  }
+  .banda-eredi figcaption {
+    font-size: .85rem; color: var(--carta-nota); font-style: italic;
+    text-align: right; padding-top: .5rem;
+  }
+
+  .numero-uno { background: var(--fondale); padding: 4rem 1.5rem; }
+  .numero-uno .colonna { max-width: 47rem; }
+  .fatti { list-style: none; margin-top: 1.8rem; display: grid; gap: 1.1rem; }
+  .fatti li { display: flex; gap: .9rem; align-items: baseline; }
+  .fatti svg { flex: none; transform: translateY(2px); }
+  .fatti strong { color: var(--oro-chiaro); }
+
+  .founder { text-align: center; }
+  .founder .colonna { max-width: 38rem; }
+  .targa {
+    display: inline-block;
+    margin: 0 auto 1.6rem;
+    font-family: "Cinzel", serif; font-weight: 600;
+    font-size: 1.05rem; letter-spacing: .08em;
+    color: var(--oro);
+    border: 1px solid rgba(201,163,90,.55);
+    border-radius: 2px;
+    padding: .55rem 1.3rem;
+    background: rgba(19,32,46,.6);
+  }
+  .founder .iscrizione { margin-left: auto; margin-right: auto; text-align: left; }
+  .founder .chiusura { margin-top: 2rem; font-style: italic; color: var(--carta-nota); }
+
+  /* ---------------------------------------------------------- footer --- */
+  footer { background: #081019; padding: 3.5rem 1.5rem 2.5rem; margin-top: 5rem; }
+  footer .colonna { max-width: 44rem; }
+  footer .chi { font-size: 1.02rem; }
+  footer .legale {
+    margin-top: 2rem; padding-top: 1.5rem;
+    border-top: 1px solid rgba(201,163,90,.2);
+    font-size: .85rem; color: var(--carta-nota);
+  }
+  footer .firma { margin-top: 1rem; font-size: .85rem; color: var(--carta-nota); }
+
+  /* ---------------------------------------------------- schermi piccoli --- */
+  @media (max-width: 860px) {
+    .hero { min-height: auto; }
+    .hero-interno { grid-template-columns: 1fr; padding-bottom: 4rem; }
+    .albo { transform: rotate(1.5deg); margin-top: .5rem; }
+    .hero {
+      background:
+        linear-gradient(180deg, rgba(11,19,30,.88) 30%, rgba(11,19,30,.72)),
+        url("assets/retro-abisso.jpg") center top / cover no-repeat;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-interno">
+    <div>
+      <img class="hero-lockup" src="assets/logo-lockup.png" alt="RuneGuardians" width="520" height="366">
+      <h1>Astralis ha <span class="erosa" aria-label="dimenticato"><span aria-hidden="true" style="--i:0">di</span><span aria-hidden="true" style="--i:1">men</span><span aria-hidden="true" style="--i:2">ti</span><span aria-hidden="true" style="--i:3">ca</span><span aria-hidden="true" style="--i:4">to</span></span>.<br>Cinque Eredi devono ricordare.</h1>
+      <p class="hero-sotto">RuneGuardians — <em>Il Peso del Ritorno</em>: il primo albo di una saga Ancient Future Fantasy, 48 tavole già illustrate e letterate, su Kickstarter a novembre 2026.</p>
+
+      <form class="iscrizione" id="form-lancio" novalidate>
+        <label for="email">La tua email</label>
+        <div class="iscrizione-riga">
+          <input type="email" id="email" name="email" placeholder="nome@esempio.com" required autocomplete="email">
+          <button type="submit">Avvisami al lancio</button>
+        </div>
+        <p class="promessa">Chi è in lista riceve il link della campagna un'ora prima del lancio pubblico.</p>
+        <p class="esito" role="status"></p>
+      </form>
+    </div>
+
+    <figure class="albo">
+      <img src="assets/cover-fronte.jpg" alt="Copertina del Numero 1: Emeric Fenn tende la mano verso una runa che brilla di luce azzurra tra i relitti" width="1100" height="1696">
+      <figcaption>Serie 1 · Numero 1 — l'albo, finito.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<div class="runa-divisore" role="presentation">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+</div>
+
+<section class="mondo">
+  <div class="colonna">
+    <p>Astralis ha costruito tutto sulla memoria: i Nomi, i Testimoni, la Continuità. Poi l'ha persa. È un mondo antico che non ricorda nemmeno il nome di ciò che sta tornando: la Risonanza, il risveglio delle Rune.</p>
+    <p>Ora le Rune ricominciano a chiamare. Sogni condivisi, glifi che si accendono, Totem che si manifestano a uomini e donne comuni. Cinque Eredi, chiamati dalle Rune, si trovano davanti a una guerra che nessuno di loro ha cercato: l'hanno ereditata. Dall'altra parte c'è qualcuno che li osserva da sempre, arriva un passo prima e non uccide: <span class="cancella">cancella</span>.</p>
+    <p>Comincia da Emeric Fenn, un recuperatore che si immerge nei relitti dove gli altri non scendono. Quello che riporta a galla non è un rottame.</p>
+    <p class="tagline">Destiny is a prison. Choice is a revolution.</p>
+  </div>
+
+  <figure class="banda-eredi">
+    <img src="assets/five-heirs.jpg" alt="I cinque Eredi riuniti, ognuno con il proprio Totem" loading="lazy" width="1024" height="1536">
+    <figcaption>I Cinque Eredi — dal canone visivo approvato.</figcaption>
+  </figure>
+</section>
+
+<div class="runa-divisore" role="presentation">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+</div>
+
+<section class="numero-uno">
+  <div class="colonna">
+    <h2>Non compri una promessa. L'albo esiste già.</h2>
+    <p><em>Il Peso del Ritorno</em> — Serie 1, Numero 1 — è finito: 48 tavole di storia, illustrate e letterate, più copertina e retrocopertina. I file di stampa sono chiusi e il tipografo è scelto. La campagna Kickstarter serve a una cosa precisa: la stampa professionale dell'albo, con obiettivo di €15.000.</p>
+    <p>Dietro il primo numero c'è un mondo già costruito: sei serie strutturate per 144 numeri, 60 Guardiani con nome, Totem e fazione, e le 60 Rune, ognuna col suo emblema disegnato. Il Numero 1 è la porta d'ingresso.</p>
+    <ul class="fatti">
+      <li><svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="#C9A35A" stroke-width="1.4"/></svg>
+        <span><strong>48 tavole pronte.</strong> Illustrate, letterate, impaginate per la stampa. Non un progetto: un albo.</span></li>
+      <li><svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="#C9A35A" stroke-width="1.4"/></svg>
+        <span><strong>Un obiettivo concreto.</strong> €15.000 per la stampa professionale del Numero 1. Kickstarter è tutto-o-niente: se l'obiettivo non si raggiunge, non paghi nulla.</span></li>
+      <li><svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="#C9A35A" stroke-width="1.4"/></svg>
+        <span><strong>Un mondo che continua.</strong> Sei serie già strutturate, 60 Guardiani, 60 Rune con i loro emblemi. Qui inizia, non finisce.</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="runa-divisore" role="presentation">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+</div>
+
+<section class="founder">
+  <div class="colonna">
+    <p class="targa">Founder's Circle · copia n° __ / 100</p>
+    <h2>Un'ora di vantaggio. Cento copie numerate.</h2>
+    <p>Il tier <strong>Founder's Circle</strong> esiste in 100 copie: Numero 1 con copertina variant esclusiva, numerata da 1 a 100, e il tuo nome nei ringraziamenti ufficiali. Quando finiscono, finiscono.</p>
+    <p>Chi è iscritto alla lista <strong>riceve il link della campagna un'ora prima del lancio pubblico</strong>, insieme all'orario esatto di apertura. Quando la campagna apre — nello stesso istante per tutti, così funziona Kickstarter — tu hai già il link in casella e sai al secondo quando cliccare. È così che si prende una copia numerata: arrivando per primi.</p>
+
+    <form class="iscrizione" data-secondo novalidate>
+      <label for="email2">La tua email</label>
+      <div class="iscrizione-riga">
+        <input type="email" id="email2" name="email" placeholder="nome@esempio.com" required autocomplete="email">
+        <button type="submit">Avvisami al lancio</button>
+      </div>
+      <p class="promessa">Solo email di RuneGuardians: l'avviso di lancio e pochi aggiornamenti che contano. Niente spam, cancellazione in un clic.</p>
+      <p class="esito" role="status"></p>
+    </form>
+
+    <p class="chiusura">Nessun costo, nessun impegno: iscriversi ti garantisce solo di non arrivare secondo.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="colonna">
+    <p class="chi">RuneGuardians è il mondo che Enzo Pellacani ha costruito documento dopo documento — la Risonanza, le fazioni, i Totem, i 60 Guardiani — prima ancora di pensarlo come fumetto. Con il Numero 1, quel mondo diventa carta per la prima volta.</p>
+    <!-- Social: da attivare all'apertura degli account @runeguardians (nota 4 del copy).
+    <p class="social"><a href="#">Instagram</a> · <a href="#">TikTok</a> · <a href="#">Facebook</a></p> -->
+    <p class="legale">Il form iscrizioni è gestito da MailerLite. Usiamo la tua email solo per gli avvisi di RuneGuardians: l'avviso di lancio e pochi aggiornamenti che contano. Nessuna cessione a terzi, disiscrizione in un clic da ogni email. <a href="privacy.html">Privacy</a></p>
+    <p class="firma">© 2026 Enzo Pellacani — RuneGuardians™ · ninefold-saga.com</p>
+  </div>
+</footer>
+
+<script>
+  // MailerLite: quando l'account esiste, incollare qui l'URL del form
+  // (MailerLite -> Forms -> Embedded -> action URL) e il campo nascosto se richiesto.
+  var MAILERLITE_ACTION = "";
+
+  document.querySelectorAll(".iscrizione").forEach(function (form) {
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var email = form.querySelector("input[type=email]");
+      var esito = form.querySelector(".esito");
+      if (!email.checkValidity()) {
+        esito.textContent = "Serve un indirizzo email valido, tipo nome@esempio.com.";
+        esito.classList.add("visibile");
+        email.focus();
+        return;
+      }
+      if (!MAILERLITE_ACTION) {
+        esito.textContent = "Le iscrizioni aprono a giorni: la pagina è in anteprima. Riprova presto.";
+        esito.classList.add("visibile");
+        return;
+      }
+      var dati = new FormData();
+      dati.append("fields[email]", email.value);
+      dati.append("ml-submit", "1");
+      fetch(MAILERLITE_ACTION, { method: "POST", body: dati, mode: "no-cors" })
+        .then(function () {
+          esito.textContent = "Fatto, sei in lista. Controlla la casella: c'è una email di conferma ad aspettarti. Il link della campagna arriverà un'ora prima del lancio.";
+          esito.classList.add("visibile");
+          form.reset();
+        })
+        .catch(function () {
+          esito.textContent = "Qualcosa non ha funzionato con l'invio. Riprova tra un momento.";
+          esito.classList.add("visibile");
+        });
+    });
+  });
+</script>
+</body>
+</html>
