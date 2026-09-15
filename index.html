@@ -414,9 +414,9 @@
     setInterval(aggiorna, 1000);
   })();
 
-  // MailerLite: quando l'account esiste, incollare qui l'URL del form
-  // (MailerLite -> Forms -> Embedded -> action URL) e il campo nascosto se richiesto.
-  var MAILERLITE_ACTION = "";
+  // MailerLite: form «Landing lancio» (account 2637181, gruppo Lancio
+  // RuneGuardians), collegato il 2026-09-15.
+  var MAILERLITE_ACTION = "https://assets.mailerlite.com/jsonp/2637181/forms/198693276965930675/subscribe";
 
   document.querySelectorAll(".iscrizione").forEach(function (form) {
     form.addEventListener("submit", function (ev) {
@@ -437,6 +437,7 @@
       var dati = new FormData();
       dati.append("fields[email]", email.value);
       dati.append("ml-submit", "1");
+      dati.append("anticsrf", "true");
       fetch(MAILERLITE_ACTION, { method: "POST", body: dati, mode: "no-cors" })
         .then(function () {
           esito.textContent = "Fatto, sei in lista. Controlla la casella: nella email di benvenuto trovi l'accesso al Mondo di RuneGuardians, e il link della campagna arriverà un'ora prima del lancio.";
