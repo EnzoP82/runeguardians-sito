@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 <header class="barra">
@@ -62,6 +63,15 @@
   addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !tenda.hidden) burger.click();
   });
+  var scena = document.querySelector("main");
+  if (scena) {
+    scena.classList.add("scena");
+    new IntersectionObserver(function (voci, o) {
+      voci.forEach(function (v) {
+        if (v.isIntersecting) { v.target.classList.add("visto"); o.unobserve(v.target); }
+      });
+    }, { threshold: 0.05 }).observe(scena);
+  }
 </script>
 </body>
 </html>
