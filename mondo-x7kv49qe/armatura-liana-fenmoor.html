@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Liana Fenmoor — evoluzione — Il Mondo di RuneGuardians</title>
+<link rel="icon" href="../assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marchio" href="index.html">
+    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
+  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="tenda" hidden>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
+</nav>
+
+<main class="scheda">
+  <a class="indietro" href="armature.html">&larr; Le Armature</a>
+  <h1>Liana Fenmoor — evoluzione</h1>
+  <div class="scheda-corpo">
+    <a class="tavola" href="assets/evoluzioni-liana-fenmoor.jpg" target="_blank" rel="noopener">
+      <img src="assets/evoluzioni-liana-fenmoor.jpg" alt="Liana Fenmoor — evoluzione"></a>
+    <div class="scheda-testi">
+      <div class='dato'><span class='dato-nome'>Guardiano</span><span class='dato-valore'>Liana Fenmoor</span></div><div class='dato'><span class='dato-nome'>Totem</span><span class='dato-valore'>Arsinoterio</span></div><div class='dato'><span class='dato-nome'>Fazione</span><span class='dato-valore'>Caos</span></div>
+      
+      
+    </div>
+  </div>
+</main>
+<footer>
+  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
+     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
+  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+</footer>
+<script>
+  var burger = document.querySelector(".burger");
+  var tenda = document.querySelector(".tenda");
+  burger.addEventListener("click", function () {
+    var aperto = !tenda.hidden;
+    tenda.hidden = aperto;
+    burger.setAttribute("aria-expanded", String(!aperto));
+    burger.classList.toggle("aperto", !aperto);
+  });
+  tenda.addEventListener("click", function (e) {
+    if (e.target === tenda) burger.click();
+  });
+  addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !tenda.hidden) burger.click();
+  });
+</script>
+</body>
+</html>

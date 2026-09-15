@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Il Numero 1 — Il Mondo di RuneGuardians</title>
+<link rel="icon" href="../assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marchio" href="index.html">
+    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
+  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="tenda" hidden>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html' class=qui>Il Numero 1</a>
+</nav>
+
+<main class="sezione stretta al-centro">
+  <img class="cover" src="../assets/cover-fronte.jpg"
+       alt="Copertina del Numero 1 — Il Peso del Ritorno">
+  <h1>Dove tutto comincia</h1>
+  <p class='voce'>Tutto comincia con Il Peso del Ritorno. Emeric Fenn, un ragazzo di un borgo di mare, recupera relitti: si immerge dove gli altri non scendono. Quello che riporta a galla non è un rottame.</p><p class='voce'>Le 48 tavole del primo albo sono pronte: illustrate, letterate, chiuse per la stampa. La campagna Kickstarter apre a novembre 2026 — e tu lo saprai un'ora prima di tutti.</p>
+  <a class="cta" href="../index.html">Torna alla pagina principale</a>
+</main>
+<footer>
+  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
+     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
+  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+</footer>
+<script>
+  var burger = document.querySelector(".burger");
+  var tenda = document.querySelector(".tenda");
+  burger.addEventListener("click", function () {
+    var aperto = !tenda.hidden;
+    tenda.hidden = aperto;
+    burger.setAttribute("aria-expanded", String(!aperto));
+    burger.classList.toggle("aperto", !aperto);
+  });
+  tenda.addEventListener("click", function (e) {
+    if (e.target === tenda) burger.click();
+  });
+  addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !tenda.hidden) burger.click();
+  });
+</script>
+</body>
+</html>

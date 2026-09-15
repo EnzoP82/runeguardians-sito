@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ash Vantor — Il Mondo di RuneGuardians</title>
+<link rel="icon" href="../assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marchio" href="index.html">
+    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
+  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="tenda" hidden>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
+</nav>
+
+<main class="scheda">
+  <a class="indietro" href="guardiani.html">&larr; I Guardiani</a>
+  <h1>Ash Vantor</h1>
+  <div class="scheda-corpo">
+    <a class="tavola" href="assets/personaggi-ash-vantor.jpg" target="_blank" rel="noopener">
+      <img src="assets/personaggi-ash-vantor.jpg" alt="Ash Vantor"></a>
+    <div class="scheda-testi">
+      <div class='dato'><span class='dato-nome'>Totem</span><span class='dato-valore'>Iena (Nihilus)</span></div><div class='dato'><span class='dato-nome'>Famiglia</span><span class='dato-valore'>Mammiferi</span></div><div class='dato'><span class='dato-nome'>Fazione</span><span class='dato-valore'>Caos</span></div><div class='dato'><span class='dato-nome'>Tier</span><span class='dato-valore'>Supporto</span></div><div class='dato'><span class='dato-nome'>Dominio</span><span class='dato-valore'>Vuoto, dissoluzione, confine</span></div>
+      <p class='prosa'>Ash Vantor è un individuo stoico e pragmatico, guidato da una logica fredda e una spietata efficienza. La sua natura di Iena Mammifera lo rende opportunista e adattabile, ma anche incline all'isolamento e alla manipolazione per raggiungere i suoi obiettivi di controllo e ordine.</p>
+      <a class='rimando' href='armatura-ash-vantor.html'>La sua tavola d'evoluzione &rarr;</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
+     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
+  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+</footer>
+<script>
+  var burger = document.querySelector(".burger");
+  var tenda = document.querySelector(".tenda");
+  burger.addEventListener("click", function () {
+    var aperto = !tenda.hidden;
+    tenda.hidden = aperto;
+    burger.setAttribute("aria-expanded", String(!aperto));
+    burger.classList.toggle("aperto", !aperto);
+  });
+  tenda.addEventListener("click", function (e) {
+    if (e.target === tenda) burger.click();
+  });
+  addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !tenda.hidden) burger.click();
+  });
+</script>
+</body>
+</html>

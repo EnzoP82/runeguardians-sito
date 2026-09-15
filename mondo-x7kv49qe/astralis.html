@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Astralis — Il Mondo di RuneGuardians</title>
+<link rel="icon" href="../assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marchio" href="index.html">
+    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
+  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="tenda" hidden>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html' class=qui>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
+</nav>
+
+<main class="sezione stretta">
+  <h1>Astralis</h1>
+  <p class='voce'>Questa è Astralis. Un mondo antico che un tempo sapeva chi era, e che oggi conserva i propri luoghi senza ricordarne il perché. La mappa che hai davanti viene dall'albo. Guardala sapendo una cosa: molti di quei nomi, ad Astralis, nessuno sa più spiegarli.</p><p class='voce'>Il Verdant Path è il verde della terra viva: campi, coste dove il sale corrode le case — il borgo di Emeric sta qui. The Argent Plains sono il paese ordinato, ogni cosa al suo posto e l'argento steso su tutto. Le Celestial Spires sono la regione dei picchi. Delle Prime Vaults e delle Chimera Wastes il mondo stesso ricorda poco: due nomi rimasti sulle mappe, in attesa che qualcuno torni a leggerli.</p><p class='voce'>Le tre fedi che trovi qui sotto si contendono tutto questo.</p><p class='voce'>E il presente? Il presente è che le Rune hanno ripreso a chiamare. La Risonanza è cominciata, e non è cominciata altrove: è cominciata qui, in queste terre, su questa mappa.</p>
+  <figure class="mappa">
+    <a href="../assets/mappa-astralis.jpg" target="_blank" rel="noopener">
+      <img src="../assets/mappa-astralis.jpg"
+           alt="La mappa del mondo di Astralis"></a>
+    <figcaption>Astralis come appare nell'albo: i nomi sulla mappa sono antichi, e sono fra le poche cose che il mondo non ha perso.</figcaption>
+  </figure>
+  <h2>Le tre fedi</h2>
+  <p class='voce'>Quando un mondo perde la memoria, deve decidere cosa farne del vuoto. Su Astralis le risposte sono diventate tre fedi, e le tre fedi si contendono ogni cosa: le terre, le Rune, i Guardiani stessi. Nessuna si considera il male.</p>
+  <div class="fazioni"><button class="fazione speranza" aria-expanded="false">
+        <span class="faz-nome">La Speranza</span>
+        <span class="faz-testo">La Speranza crede che ciò che è stato dimenticato si possa ritrovare. Custodisce archivi, incide nomi sulla pietra, ascolta le rovine. Ricordare, per lei, è il primo atto di ricostruzione. I suoi colori: bianco, oro, blu astrale.</span></button><button class="fazione controllo" aria-expanded="false">
+        <span class="faz-nome">Il Controllo</span>
+        <span class="faz-testo">Il Controllo crede che Astralis sia caduta perché lasciata a se stessa. Ordine, misura, obbedienza: così non si perde più nulla. Nelle sue terre i campi sono rettangoli uguali, i canali dritti come righelli. Argento e blu freddo.</span></button><button class="fazione oblio" aria-expanded="false">
+        <span class="faz-nome">L'Oblio</span>
+        <span class="faz-testo">L'Oblio crede che la memoria sia il peso che spezza il mondo. Ciò che viene cancellato non può più tradire, né dolere. Dove passa non restano nemmeno le macerie. Il suo colore è il cremisi.</span></button></div>
+</main>
+<footer>
+  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
+     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
+  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+</footer>
+<script>
+  var burger = document.querySelector(".burger");
+  var tenda = document.querySelector(".tenda");
+  burger.addEventListener("click", function () {
+    var aperto = !tenda.hidden;
+    tenda.hidden = aperto;
+    burger.setAttribute("aria-expanded", String(!aperto));
+    burger.classList.toggle("aperto", !aperto);
+  });
+  tenda.addEventListener("click", function (e) {
+    if (e.target === tenda) burger.click();
+  });
+  addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !tenda.hidden) burger.click();
+  });
+</script>
+</body>
+</html>
+<script>
+  document.querySelectorAll(".fazione").forEach(function (b) {
+    b.addEventListener("click", function () {
+      b.setAttribute("aria-expanded",
+        b.getAttribute("aria-expanded") === "true" ? "false" : "true");
+    });
+  });
+</script>

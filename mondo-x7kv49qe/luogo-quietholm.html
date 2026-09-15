@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Quietholm — Il Mondo di RuneGuardians</title>
+<link rel="icon" href="../assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marchio" href="index.html">
+    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
+  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="tenda" hidden>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
+</nav>
+
+<main class="scheda">
+  <a class="indietro" href="luoghi.html">&larr; I Luoghi</a>
+  <h1>Quietholm</h1>
+  <div class="scheda-corpo">
+    <a class="tavola" href="assets/luoghi-quietholm.jpg" target="_blank" rel="noopener">
+      <img src="assets/luoghi-quietholm.jpg" alt="Quietholm"></a>
+    <div class="scheda-testi">
+      <div class='dato'><span class='dato-nome'>Tipo</span><span class='dato-valore'>Borgo maggiore del Controllo («il paese ordinato»)</span></div><div class='dato'><span class='dato-nome'>Regione</span><span class='dato-valore'>The Argent Plains</span></div><div class='dato'><span class='dato-nome'>Filosofia</span><span class='dato-valore'>Controllo</span></div><div class='dato'><span class='dato-nome'>Era</span><span class='dato-valore'>I</span></div><div class='dato'><span class='dato-nome'>Appare in</span><span class='dato-valore'>S1 N18, S1 N19, S1 N20</span></div>
+      <p class='prosa'>QUIETHOLM, geometrie chiare e regolari nella luce piena, tutta pavesata a festa</p><p class='prosa'>strade dritte, pietra chiara lavata, ogni cosa al suo posto, l'argento-blu freddo dell'ordine steso su tutto. È addobbato a festa: nastri, lanterne, ghirlande — ma tutto nello stesso argento gentile, senza un colore fuori riga.</p>
+      
+    </div>
+  </div>
+</main>
+<footer>
+  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
+     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
+  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+</footer>
+<script>
+  var burger = document.querySelector(".burger");
+  var tenda = document.querySelector(".tenda");
+  burger.addEventListener("click", function () {
+    var aperto = !tenda.hidden;
+    tenda.hidden = aperto;
+    burger.setAttribute("aria-expanded", String(!aperto));
+    burger.classList.toggle("aperto", !aperto);
+  });
+  tenda.addEventListener("click", function (e) {
+    if (e.target === tenda) burger.click();
+  });
+  addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !tenda.hidden) burger.click();
+  });
+</script>
+</body>
+</html>

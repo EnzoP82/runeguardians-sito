@@ -158,6 +158,38 @@
   .esito { margin-top: .9rem; font-size: 1rem; color: var(--runa); display: none; }
   .esito.visibile { display: block; }
 
+  /* ------------------------------------------------------- countdown --- */
+  .conto { background: var(--fondale); border-top: 1px solid rgba(201,163,90,.25);
+           border-bottom: 1px solid rgba(201,163,90,.25);
+           padding: 2.2rem 1.5rem; text-align: center; }
+  .conto .quando { color: var(--carta-nota); font-style: italic; margin-bottom: 1rem; }
+  .conto-cifre { display: flex; justify-content: center; gap: clamp(.8rem, 4vw, 2.4rem); }
+  .conto-cifre .blocco { min-width: 4.2rem; }
+  .conto-cifre .numero { font-family: "Cinzel", serif; font-weight: 600;
+    font-size: clamp(1.7rem, 5vw, 2.8rem); color: var(--oro-chiaro);
+    font-variant-numeric: tabular-nums; }
+  .conto-cifre .unita { font-size: .78rem; letter-spacing: .08em;
+    color: var(--carta-nota); }
+
+  /* -------------------------------------------------- invito al mondo --- */
+  .mondo-invito { background: var(--fondale); padding: 4rem 1.5rem; }
+  .mondo-invito .colonna { max-width: 60rem; display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 2.5rem;
+    align-items: center; }
+  .mondo-invito img { display: block; width: 100%; height: auto;
+    border-radius: 4px; border: 1px solid rgba(201,163,90,.35);
+    box-shadow: 0 14px 40px rgba(0,0,0,.5); transform: rotate(-1.5deg); }
+  .mondo-invito .voce-mondo { font-size: 1.05rem; }
+  .ancora-form { display: inline-block; margin-top: 1.4rem;
+    font-family: "Cinzel", serif; font-weight: 600; font-size: .95rem;
+    letter-spacing: .04em; color: var(--abisso);
+    background: linear-gradient(170deg, var(--oro-chiaro), var(--oro));
+    border-radius: 3px; padding: .85rem 1.6rem; text-decoration: none; }
+  .ancora-form:hover { background: linear-gradient(170deg, #F0DCA8, var(--oro-chiaro)); }
+  @media (max-width: 760px) {
+    .mondo-invito .colonna { grid-template-columns: 1fr; }
+  }
+
   /* --------------------------------------------------------- sezioni --- */
   section { padding: 0 1.5rem; }
   .colonna { max-width: 44rem; margin: 0 auto; }
@@ -261,6 +293,16 @@
   </div>
 </header>
 
+<section class="conto" aria-label="Conto alla rovescia al lancio">
+  <p class="quando">La campagna apre a novembre 2026 — il conto alla rovescia è cominciato.</p>
+  <div class="conto-cifre" id="conto-cifre">
+    <div class="blocco"><div class="numero" data-u="g">—</div><div class="unita">giorni</div></div>
+    <div class="blocco"><div class="numero" data-u="h">—</div><div class="unita">ore</div></div>
+    <div class="blocco"><div class="numero" data-u="m">—</div><div class="unita">minuti</div></div>
+    <div class="blocco"><div class="numero" data-u="s">—</div><div class="unita">secondi</div></div>
+  </div>
+</section>
+
 <div class="runa-divisore" role="presentation">
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="currentColor" stroke-width="1.1"/></svg>
 </div>
@@ -325,6 +367,22 @@
   </div>
 </section>
 
+<div class="runa-divisore" role="presentation">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+</div>
+
+<section class="mondo-invito">
+  <div class="colonna">
+    <img src="assets/mappa-astralis.jpg" alt="La mappa del mondo di Astralis, dalle tavole dell'albo" loading="lazy">
+    <div>
+      <h2>Entra nel Mondo di RuneGuardians</h2>
+      <p class="voce-mondo">Chi si iscrive non aspetta a mani vuote: riceve subito l'accesso all'area riservata del Mondo — la mappa di Astralis, i Guardiani già ratificati nel canone con nome, Totem e fazione, i luoghi con le loro atmosfere, le tavole d'evoluzione delle Armature.</p>
+      <p class="voce-mondo">Il Mondo cresce numero dopo numero, e chi è in lista lo scopre in anteprima: prima che venga pubblicato, prima di chiunque altro.</p>
+      <a class="ancora-form" href="#form-lancio">Iscriviti e entra nel Mondo</a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="colonna">
     <p class="chi">RuneGuardians è il mondo che Enzo Pellacani ha costruito documento dopo documento — la Risonanza, le fazioni, i Totem, i 60 Guardiani — prima ancora di pensarlo come fumetto. Con il Numero 1, quel mondo diventa carta per la prima volta.</p>
@@ -336,6 +394,26 @@
 </footer>
 
 <script>
+  // Conto alla rovescia. La data e' quella a sistema (2026-11-01,
+  // stato: provvisoria): se Enzo la cambia, si aggiorna QUI.
+  var LANCIO = new Date("2026-11-01T12:00:00+01:00");
+  (function () {
+    var cifre = {};
+    document.querySelectorAll("#conto-cifre .numero").forEach(function (n) {
+      cifre[n.dataset.u] = n;
+    });
+    function aggiorna() {
+      var resto = Math.max(0, LANCIO - Date.now());
+      var s = Math.floor(resto / 1000);
+      cifre.g.textContent = Math.floor(s / 86400);
+      cifre.h.textContent = String(Math.floor(s / 3600) % 24).padStart(2, "0");
+      cifre.m.textContent = String(Math.floor(s / 60) % 60).padStart(2, "0");
+      cifre.s.textContent = String(s % 60).padStart(2, "0");
+    }
+    aggiorna();
+    setInterval(aggiorna, 1000);
+  })();
+
   // MailerLite: quando l'account esiste, incollare qui l'URL del form
   // (MailerLite -> Forms -> Embedded -> action URL) e il campo nascosto se richiesto.
   var MAILERLITE_ACTION = "";

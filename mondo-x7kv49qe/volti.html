@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>I Volti — Il Mondo di RuneGuardians</title>
+<link rel="icon" href="../assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marchio" href="index.html">
+    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
+  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="tenda" hidden>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html' class=qui>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
+</nav>
+
+<main class="sezione">
+  <h1>I Volti di Astralis</h1>
+  <p class='voce'>Il mondo non è fatto solo di Eredi: questi sono i volti che i Guardiani incontrano lungo la strada.</p>
+  <div class="griglia"><a class='card' href='volto-abitanti-archive-city.html'><img src='assets/secondari-abitanti-archive-city.jpg' alt="Lo Scriba di Archive City" loading='lazy'><span class='vela'><span class='nome'>Lo Scriba di Archive City</span><p class='dett'>Scriba dell'Archivio: occhiali di corno, dita d'inchiostro</p></span></a><a class='card' href='volto-agente-controllo-grigio.html'><img src='assets/secondari-agente-controllo-grigio.jpg' alt="L'agente del Controllo in grigio" loading='lazy'><span class='vela'><span class='nome'>L'agente del Controllo in grigio</span><p class='dett'>Esecutore anonimo del Controllo</p></span></a><a class='card' href='volto-cancellato.html'><img src='assets/secondari-cancellato.jpg' alt="Il Cancellato / Aldous Merrin" loading='lazy'><span class='vela'><span class='nome'>Il Cancellato / Aldous Merrin</span><p class='dett'>Aldous Merrin, il padre di Bryn: la prima vittima mostrata della cancellazione</p></span></a><a class='card' href='volto-cast-villaggio-libero.html'><img src='assets/secondari-cast-villaggio-libero.jpg' alt="La Nonna di Ferrhold" loading='lazy'><span class='vela'><span class='nome'>La Nonna di Ferrhold</span><p class='dett'>La nonna del villaggio libero di Ferrhold</p></span></a><a class='card' href='volto-funzionario-gentile.html'><img src='assets/secondari-funzionario-gentile.jpg' alt="Il funzionario gentile del Controllo" loading='lazy'><span class='vela'><span class='nome'>Il funzionario gentile del Controllo</span><p class='dett'>Archetipo del burocrate che cancella con dolcezza</p></span></a><a class='card' href='volto-nerine.html'><img src='assets/secondari-nerine.jpg' alt="Nerine / La Guardiana del faro" loading='lazy'><span class='vela'><span class='nome'>Nerine / La Guardiana del faro</span><p class='dett'>La donna che crebbe Wren/Selene; ostaggio del ricatto di Milo Grey</p></span></a><a class='card' href='volto-vecchio-pescatore.html'><img src='assets/secondari-vecchio-pescatore.jpg' alt="Il Vecchio Pescatore" loading='lazy'><span class='vela'><span class='nome'>Il Vecchio Pescatore</span><p class='dett'>Amico di Emeric al borgo; in N5 è la prova vivente della cancellazione</p></span></a></div>
+</main>
+<footer>
+  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
+     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
+  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+</footer>
+<script>
+  var burger = document.querySelector(".burger");
+  var tenda = document.querySelector(".tenda");
+  burger.addEventListener("click", function () {
+    var aperto = !tenda.hidden;
+    tenda.hidden = aperto;
+    burger.setAttribute("aria-expanded", String(!aperto));
+    burger.classList.toggle("aperto", !aperto);
+  });
+  tenda.addEventListener("click", function (e) {
+    if (e.target === tenda) burger.click();
+  });
+  addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !tenda.hidden) burger.click();
+  });
+</script>
+</body>
+</html>

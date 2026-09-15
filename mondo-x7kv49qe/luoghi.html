@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>I Luoghi — Il Mondo di RuneGuardians</title>
+<link rel="icon" href="../assets/logo-lockup.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marchio" href="index.html">
+    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
+  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="tenda" hidden>
+  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html' class=qui>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html'>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
+</nav>
+
+<main class="sezione">
+  <h1>Le terre di Astralis</h1>
+  <p class='voce'>Ogni terra di Astralis porta i segni di quello che ha dimenticato. Una città-biblioteca. Un borgo corroso dal sale. Una voragine dove il sole non scende mai.</p><p class='voce'>Tocca un luogo per aprire la sua scheda. Alcuni li riconoscerai nel Numero 1.</p>
+  <div class="griglia larga"><a class='card' href='luogo-archive-city.html'><img src='assets/luoghi-archive-city.jpg' alt="Archive City" loading='lazy'><span class='vela'><span class='nome'>Archive City</span><p class='dett'>Città-biblioteca</p><p class='dett'>Speranza</p></span></a><a class='card' href='luogo-emberhold.html'><img src='assets/luoghi-emberhold.jpg' alt="Emberhold" loading='lazy'><span class='vela'><span class='nome'>Emberhold</span><p class='dett'>Città-fornace</p><p class='dett'>La frontiera del fuoco · Speranza</p></span></a><a class='card' href='luogo-ferrhold.html'><img src='assets/luoghi-ferrhold.jpg' alt="Ferrhold" loading='lazy'><span class='vela'><span class='nome'>Ferrhold</span><p class='dett'>Villaggio libero fortificato al confine</p><p class='dett'>Terre libere oltre il confine del paese ordinato · Speranza</p></span></a><a class='card' href='luogo-frontier-valley.html'><img src='assets/luoghi-frontier-valley.jpg' alt="Frontier Valley" loading='lazy'><span class='vela'><span class='nome'>Frontier Valley</span><p class='dett'>Borgo marinaro costiero</p><p class='dett'>Verdant Path · Speranza</p></span></a><a class='card' href='luogo-gavelhold.html'><img src='assets/luoghi-gavelhold.jpg' alt="Gavelhold" loading='lazy'><span class='vela'><span class='nome'>Gavelhold</span><p class='dett'>Città-tribunale</p><p class='dett'>Controllo</p></span></a><a class='card' href='luogo-mirkhollow.html'><img src='assets/luoghi-mirkhollow.jpg' alt="Mirkhollow" loading='lazy'><span class='vela'><span class='nome'>Mirkhollow</span><p class='dett'>Città mineraria sprofondata</p><p class='dett'>Celestial Spires (regione precisa non canonizzata; sul cammino tra Tidehollow e Stillfell; ratifica Enzo 2026-09-03: Astralis e' il nome del mondo, la regione dei picchi prende il nome canonico v1) · Speranza</p></span></a><a class='card' href='luogo-pietre-del-coro.html'><img src='assets/luoghi-pietre-del-coro.jpg' alt="Le Pietre del Coro" loading='lazy'><span class='vela'><span class='nome'>Le Pietre del Coro</span><p class='dett'>Rovine runiche sommerse — area sacra</p><p class='dett'>Presso Frontier Valley · Speranza</p></span></a><a class='card' href='luogo-quietholm.html'><img src='assets/luoghi-quietholm.jpg' alt="Quietholm" loading='lazy'><span class='vela'><span class='nome'>Quietholm</span><p class='dett'>Borgo maggiore del Controllo («il paese ordinato»)</p><p class='dett'>The Argent Plains · Controllo</p></span></a><a class='card' href='luogo-sala-dei-fondatori.html'><img src='assets/luoghi-sala-dei-fondatori.jpg' alt="La Sala dei Fondatori" loading='lazy'><span class='vela'><span class='nome'>La Sala dei Fondatori</span><p class='dett'>Rovina della Trinità su rupe sul mare (sede sul mare della Trinità — distinta dalla Soglia della Trinità / Prima Forgia di S1 N19, nell'entroterra)</p><p class='dett'>Sopra Le Pietre del Coro · Speranza</p></span></a><a class='card' href='luogo-soglia-della-trinita.html'><img src='assets/luoghi-soglia-della-trinita.jpg' alt="La Soglia della Trinità / La Prima Forgia" loading='lazy'><span class='vela'><span class='nome'>La Soglia della Trinità / La Prima Forgia</span><p class='dett'>Rovina della Trinità in gola di roccia</p><p class='dett'>Nell'entroterra · Speranza</p></span></a></div>
+</main>
+<footer>
+  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
+     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
+  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+</footer>
+<script>
+  var burger = document.querySelector(".burger");
+  var tenda = document.querySelector(".tenda");
+  burger.addEventListener("click", function () {
+    var aperto = !tenda.hidden;
+    tenda.hidden = aperto;
+    burger.setAttribute("aria-expanded", String(!aperto));
+    burger.classList.toggle("aperto", !aperto);
+  });
+  tenda.addEventListener("click", function (e) {
+    if (e.target === tenda) burger.click();
+  });
+  addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !tenda.hidden) burger.click();
+  });
+</script>
+</body>
+</html>
