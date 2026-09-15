@@ -98,6 +98,37 @@ main.al-centro { text-align:center; }
               color:var(--oro-chiaro); }
 .card .dett { font-size:.84rem; color:var(--nota); margin-top:.15rem; }
 
+/* I contatori del canone: numeri-eroe, testo nei toni del testo. */
+.contatori { display:grid; grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));
+             gap:1rem; margin:1.6rem 0 2rem; }
+.contatore { display:block; text-align:center; text-decoration:none;
+             background:var(--fondale); border:1px solid rgba(201,163,90,.25);
+             border-radius:4px; padding:1.1rem .8rem;
+             transition:transform .22s ease, box-shadow .22s ease; }
+a.contatore:hover { transform:translateY(-3px);
+                    box-shadow:0 10px 28px rgba(0,0,0,.45); }
+.contatore .numero { display:block; font-family:"Cinzel",serif;
+  font-weight:600; font-size:clamp(1.9rem,4vw,2.6rem);
+  color:var(--oro-chiaro); font-variant-numeric:tabular-nums; }
+.contatore .etichetta { display:block; margin-top:.15rem;
+  font-size:.85rem; color:var(--nota); }
+
+/* Gli schieramenti del roster. */
+.conta-schieramento { font-size:.65em; color:var(--nota);
+  border:1px solid rgba(201,163,90,.4); border-radius:2rem;
+  padding:.1em .6em; vertical-align:.15em; margin-left:.35rem; }
+.intro-schieramento { color:var(--nota); max-width:44rem; margin:.4rem 0 0; }
+
+/* La card di chi aspetta la ratifica: sagoma, niente scheda. */
+.card.futura { cursor:default; opacity:.75; }
+.card.futura:hover { transform:none; box-shadow:none; }
+.card.futura .sagoma { display:grid; place-content:center; height:15rem;
+  color:rgba(201,163,90,.4);
+  background:
+    radial-gradient(closest-side at 50% 42%, rgba(53,182,232,.10), transparent 70%),
+    linear-gradient(180deg, #101b28, #0C1520); }
+.card.futura .attesa { font-style:italic; color:rgba(167,158,140,.75); }
+
 .scheda .indietro { display:inline-block; margin-bottom:1.4rem;
                     color:var(--nota); text-decoration:none; }
 .scheda .indietro:hover { color:var(--oro-chiaro); }
