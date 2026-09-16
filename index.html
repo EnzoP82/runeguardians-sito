@@ -216,6 +216,12 @@
     padding-top: .7rem; font-style: italic;
   }
 
+  /* --------------------------------------------------------- trailer --- */
+  .trailer-player { width: 100%; border-radius: 6px; margin-top: 1.2rem;
+                    border: 1px solid rgba(201,163,90,.3);
+                    box-shadow: 0 18px 44px rgba(0,0,0,.5);
+                    background: #000; display: block; }
+
   /* ---------------------------------------------------------- autore --- */
   .autore { display: flex; gap: 1.4rem; align-items: center; margin-top: 2.4rem;
             padding-top: 1.8rem; border-top: 1px solid rgba(201,163,90,.22); }
@@ -480,6 +486,22 @@
         <p>Un solo creatore: mondo, personaggi, struttura delle sei serie e art direction nascono e restano nelle stesse mani. Nessun editore, nessuna cessione di diritti — il mondo resta di chi lo ha creato, e voi ne ricevete un pezzo.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="runa-divisore" role="presentation">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0.8 L13.2 7 L7 13.2 L0.8 7 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+</div>
+
+<section class="trailer scena" aria-label="Il trailer della campagna">
+  <div class="colonna">
+    <h2>Guarda il trailer</h2>
+    <p>Novanta secondi dentro Astralis: la Runa che chiama, i luoghi del mondo, le tavole del Numero&nbsp;1.</p>
+    <video class="trailer-player" controls preload="metadata" poster="assets/trailer-poster.jpg" crossorigin="anonymous">
+      <source src="assets/trailer.mp4" type="video/mp4">
+      <track kind="captions" src="assets/trailer-it.vtt" srclang="it" label="Italiano" default>
+      Il tuo browser non riproduce il video: <a href="assets/trailer.mp4">scaricalo qui</a>.
+    </video>
   </div>
 </section>
 
