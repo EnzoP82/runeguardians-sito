@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Changa:wght@600;700;800&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/rune.css?v=5eff63f78e">
+<link rel="stylesheet" href="assets/rune.css?v=58bb48a900">
 <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -219,7 +219,7 @@
         dati.append("anticsrf", "true");
         fetch(MAILERLITE_ACTION, { method: "POST", body: dati, mode: "no-cors" })
           .then(function () {
-            esito.textContent = "Fatto, sei in lista. Controlla la casella: nella email di benvenuto trovi l'accesso al Mondo di RuneGuardians.";
+            esito.textContent = "Fatto. Ora controlla la casella (anche la posta indesiderata): nella email di conferma c'è il link per completare l'iscrizione, poi arriva il benvenuto con l'accesso al Mondo di RuneGuardians.";
             esito.classList.add("visibile");
             form.reset();
           })

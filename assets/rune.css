@@ -1202,3 +1202,11 @@ footer .legale {
   font-size: .85rem; color: var(--carta-nota);
 }
 footer .firma { margin-top: 1rem; font-size: .85rem; color: var(--carta-nota); }
+
+/* ------------------------------------------------------------- grazie --- */
+/* La pagina in cui MailerLite manda chi conferma l'iscrizione
+   (genera_sito.pagina_grazie): apertura di pagina come /contatti/, testo
+   corrente come /il-mondo/, i due bottoni sotto. */
+.grazie .colonna-lettura p { font-size: 1.1rem; line-height: 1.75; }
+.grazie .colonna-lettura p + p { margin-top: 1rem; }
+.grazie .grazie-azioni { margin-top: 1.8rem; display: flex; flex-wrap: wrap; gap: 1rem; }
