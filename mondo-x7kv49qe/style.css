@@ -1,211 +1,195 @@
 
-:root { --abisso:#0B131E; --fondale:#13202E; --carta:#E9E1CC; --nota:#A79E8C;
-        --oro:#C9A35A; --oro-chiaro:#E3C98F; --runa:#35B6E8;
-        --argento:#9FB4C7; --cremisi:#A93B37; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--abisso); color:var(--carta);
-       font-family:"Alegreya",Georgia,serif; font-size:18px; line-height:1.65; }
-::selection { background:var(--runa); color:var(--abisso); }
-a { color:var(--runa); }
-:focus-visible { outline:2px solid var(--runa); outline-offset:3px; }
-h1, h2 { font-family:"Cinzel",serif; font-weight:600; color:var(--oro); }
-h1 { font-size:clamp(1.7rem,4.5vw,2.4rem); margin-bottom:1rem; }
-h2 { font-size:clamp(1.25rem,3vw,1.7rem); margin:2.6rem 0 .8rem; }
+/* Il Mondo di RuneGuardians — il foglio in piu' dell'area riservata.
+   Palette, font, bottoni, barra e footer arrivano da ../assets/rune.css
+   (l'involucro del sito): qui solo cio' che il sito pubblico non ha —
+   le tappe del viaggio, le card del canone, le schede, le tre fedi. Le
+   classi parlano lo stesso vocabolario del restyle (vetro, bordo in
+   gradiente, bagliore oro/runa, titoli Changa). */
 
-.barra { position:sticky; top:0; z-index:20; display:flex;
-         align-items:center; justify-content:space-between;
-         padding:.7rem 1.1rem; background:rgba(11,19,30,.93);
-         backdrop-filter:blur(8px);
-         border-bottom:1px solid rgba(201,163,90,.25); }
-.barra .marchio img { height:2.1rem; width:auto; display:block; }
-.burger { width:2.6rem; height:2.6rem; display:grid; place-content:center;
-          gap:.34rem; background:none; border:1px solid rgba(201,163,90,.4);
-          border-radius:3px; cursor:pointer; }
-.burger span { display:block; width:1.35rem; height:2px;
-               background:var(--oro); transition:transform .3s, opacity .3s; }
-.burger.aperto span:nth-child(1) { transform:translateY(.42rem) rotate(45deg); }
-.burger.aperto span:nth-child(2) { opacity:0; }
-.burger.aperto span:nth-child(3) { transform:translateY(-.42rem) rotate(-45deg); }
-.tenda[hidden] { display:none; }
-.tenda { position:fixed; inset:0; z-index:15; background:rgba(6,11,18,.96);
-         display:flex; flex-direction:column; align-items:center;
-         justify-content:center; gap:1.3rem; padding:5rem 1.5rem; }
-.tenda a { font-family:"Cinzel",serif; font-size:clamp(1.05rem,3vw,1.4rem);
-           letter-spacing:.05em; color:var(--carta); text-decoration:none;
-           padding:.3rem .8rem; }
-.tenda a:hover { color:var(--oro-chiaro); }
-.tenda a.qui { color:var(--oro); border-bottom:2px solid var(--oro); }
-
-main { max-width:74rem; margin:0 auto; padding:3rem 1.5rem 4rem; }
-main.stretta { max-width:46rem; }
-main.al-centro { text-align:center; }
-.voce { font-size:clamp(1.02rem,2vw,1.15rem); }
-.voce + .voce, .prosa + .prosa { margin-top:.9em; }
-.prosa { color:var(--carta); }
-
-.hub .lockup { width:min(14rem,55vw); height:auto; margin:1.5rem 0 1.8rem; }
-.tappe { display:grid; gap:1rem; margin-top:2.4rem; text-align:left; }
-.tappa-hub { display:block; background:var(--fondale); text-decoration:none;
-             border:1px solid rgba(201,163,90,.3); border-radius:4px;
-             padding:1.1rem 1.3rem;
-             transition:transform .22s ease, box-shadow .22s ease; }
-.tappa-hub:hover { transform:translateX(.4rem);
-                   box-shadow:0 8px 26px rgba(0,0,0,.45); }
-.tappa-nome { display:block; font-family:"Cinzel",serif; color:var(--oro-chiaro);
-              font-size:1.05rem; letter-spacing:.04em; }
-.tappa-dett { display:block; color:var(--nota); font-size:.92rem;
-              margin-top:.15rem; }
-
-.mappa { margin:2.4rem 0; }
-.mappa img { display:block; width:100%; height:auto; border-radius:4px;
-             border:1px solid rgba(201,163,90,.35); }
-.mappa figcaption { text-align:center; color:var(--nota); font-style:italic;
-                    font-size:.88rem; padding-top:.6rem; }
-
-.fazioni { display:grid; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));
-           gap:1.1rem; margin-top:1.8rem; text-align:left; }
-.fazione { cursor:pointer; font:inherit; color:var(--carta);
-           background:var(--fondale); border-radius:4px; padding:1.2rem 1.3rem;
-           border:1px solid rgba(201,163,90,.3); text-align:left;
-           transition:transform .25s ease, box-shadow .25s ease; }
-.fazione:hover { transform:translateY(-3px); }
-.faz-nome { display:block; font-family:"Cinzel",serif; font-size:1rem;
-            letter-spacing:.05em; }
-.faz-testo { display:block; margin-top:.6rem; color:var(--nota);
-             max-height:0; overflow:hidden; opacity:0;
-             transition:max-height .45s ease, opacity .45s ease; }
-.fazione[aria-expanded="true"] .faz-testo { max-height:14rem; opacity:1; }
-.fazione.speranza { border-color:rgba(53,182,232,.55); }
-.fazione.speranza .faz-nome { color:var(--runa); }
-.fazione.controllo { border-color:rgba(159,180,199,.55); }
-.fazione.controllo .faz-nome { color:var(--argento); }
-.fazione.oblio { border-color:rgba(169,59,55,.6); }
-.fazione.oblio .faz-nome { color:var(--cremisi); }
-
-.griglia { display:grid; grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));
-           gap:1.2rem; margin-top:2rem; }
-.griglia.larga { grid-template-columns:repeat(auto-fill,minmax(17rem,1fr)); }
-.card { display:block; border:1px solid rgba(201,163,90,.22); border-radius:4px;
-        overflow:hidden; background:var(--fondale); text-decoration:none;
-        color:var(--carta);
-        transition:transform .25s ease, box-shadow .25s ease; }
-.card:hover { transform:translateY(-4px);
-              box-shadow:0 12px 34px rgba(0,0,0,.5); }
-.card img { display:block; width:100%; height:15rem; object-fit:cover;
-            object-position:top center; }
-.card .vela { display:block; padding:.8rem .9rem 1rem; }
-.card .nome { display:block; font-family:"Cinzel",serif; font-size:.92rem;
-              color:var(--oro-chiaro); }
-.card .dett { font-size:.84rem; color:var(--nota); margin-top:.15rem; }
-
-/* I contatori del canone: numeri-eroe, testo nei toni del testo. */
-.contatori { display:grid; grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));
-             gap:1rem; margin:1.6rem 0 2rem; }
-.contatore { display:block; text-align:center; text-decoration:none;
-             background:var(--fondale); border:1px solid rgba(201,163,90,.25);
-             border-radius:4px; padding:1.1rem .8rem;
-             transition:transform .22s ease, box-shadow .22s ease; }
-a.contatore:hover { transform:translateY(-3px);
-                    box-shadow:0 10px 28px rgba(0,0,0,.45); }
-.contatore .numero { display:block; font-family:"Cinzel",serif;
-  font-weight:600; font-size:clamp(1.9rem,4vw,2.6rem);
-  color:var(--oro-chiaro); font-variant-numeric:tabular-nums; }
-.contatore .etichetta { display:block; margin-top:.15rem;
-  font-size:.85rem; color:var(--nota); }
-
-/* Gli schieramenti del roster. */
-.conta-schieramento { font-size:.65em; color:var(--nota);
-  border:1px solid rgba(201,163,90,.4); border-radius:2rem;
-  padding:.1em .6em; vertical-align:.15em; margin-left:.35rem; }
-.intro-schieramento { color:var(--nota); max-width:44rem; margin:.4rem 0 0; }
-
-/* La card di chi aspetta la ratifica: sagoma, niente scheda. */
-.card.futura { cursor:default; opacity:.75; }
-.card.futura:hover { transform:none; box-shadow:none; }
-.card.futura .sagoma { display:grid; place-content:center; height:15rem;
-  color:rgba(201,163,90,.4);
-  background:
-    radial-gradient(closest-side at 50% 42%, rgba(53,182,232,.10), transparent 70%),
-    linear-gradient(180deg, #101b28, #0C1520); }
-.card.futura .attesa { font-style:italic; color:rgba(167,158,140,.75); }
-
-.scheda .indietro { display:inline-block; margin-bottom:1.4rem;
-                    color:var(--nota); text-decoration:none; }
-.scheda .indietro:hover { color:var(--oro-chiaro); }
-.scheda-corpo { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr);
-                gap:2.2rem; align-items:start; margin-top:1rem; }
-.tavola img { display:block; width:100%; height:auto; border-radius:4px;
-              border:1px solid rgba(201,163,90,.3); }
-.dato { display:flex; gap:.7rem; padding:.45rem 0;
-        border-bottom:1px solid rgba(201,163,90,.15); }
-.dato-nome { flex:0 0 6.5rem; font-family:"Cinzel",serif; font-size:.78rem;
-             letter-spacing:.05em; color:var(--oro); padding-top:.15rem; }
-.dato-valore { color:var(--carta); }
-.scheda-testi .prosa { margin-top:1.1em; color:var(--carta); }
-.rimando { display:inline-block; margin-top:1.4rem; color:var(--runa);
-           text-decoration:none; border:1px solid rgba(53,182,232,.4);
-           border-radius:3px; padding:.5rem 1rem; }
-.rimando:hover { color:var(--oro-chiaro); border-color:rgba(201,163,90,.5); }
-
-.cover { width:min(16rem,70vw); height:auto; border-radius:3px;
-         border:1px solid rgba(201,163,90,.35);
-         box-shadow:0 20px 50px rgba(0,0,0,.6); margin:1rem 0 1.6rem;
-         transform:rotate(-2deg); }
-.cta { display:inline-block; margin-top:1.6rem; font-family:"Cinzel",serif;
-       font-weight:600; font-size:.95rem; letter-spacing:.04em;
-       color:var(--abisso);
-       background:linear-gradient(170deg,var(--oro-chiaro),var(--oro));
-       border-radius:3px; padding:.85rem 1.6rem; text-decoration:none; }
-
-footer { text-align:center; color:var(--nota); font-size:.85rem;
-         padding:2.5rem 1.5rem; background:#081019; margin-top:3rem; }
-footer a { color:var(--oro); }
-
-/* Il viaggio a sblocchi: tappe chiuse col lucchetto, la prossima in oro. */
-.tenda a.bloccata, .tappa-hub.bloccata { opacity:.4; cursor:not-allowed; }
-.tenda a.bloccata::after { content:" \1F512"; font-size:.75em; }
-.tappa-hub.bloccata .tappa-nome::after { content:" \1F512"; font-size:.8em; }
-.tappa-hub.bloccata:hover { transform:none; box-shadow:none; }
-.tenda a.prossima { color:var(--oro); }
-.tenda a.prossima::before { content:"\25C6 "; font-size:.7em;
-  vertical-align:.12em; }
-.tappa-hub.prossima { border-color:rgba(201,163,90,.8);
-  box-shadow:0 0 26px rgba(201,163,90,.22); }
-.tappa-hub.prossima .tappa-nome { color:var(--oro); }
-.tappa-hub.prossima .tappa-nome::before { content:"\25C6 "; font-size:.7em;
-  vertical-align:.12em; }
-@media (prefers-reduced-motion: no-preference) {
-  .tenda a.prossima::before, .tappa-hub.prossima .tappa-nome::before {
-    animation:brilla 2.6s ease-in-out infinite; display:inline-block; }
-  @keyframes brilla { 0%,100% { opacity:.5; } 50% { opacity:1; } }
-  .scrollone { animation:scrollone .4s ease; }
-  @keyframes scrollone {
-    0%,100% { transform:translateX(0); }
-    25% { transform:translateX(-.35rem); }
-    60% { transform:translateX(.3rem); }
-  }
+/* La barra: sette voci invece di cinque, che sui portatili vanno a capo
+   invece di uscire dallo schermo. */
+.barra-sito nav { flex-wrap: wrap; justify-content: center; row-gap: .1rem; }
+@media (min-width: 761px) and (max-width: 1180px) {
+  .barra-sito nav { gap: .9rem; }
+  .barra-sito nav a { font-size: .82rem; }
 }
 
-/* Il respiro del Mondo: entrate in scena e transizioni tra pagine. */
-.mappa-fondale { position:fixed; inset:-6%; z-index:-1; opacity:.09;
-  background:url("../assets/mappa-astralis.jpg") center/cover no-repeat;
-  filter:saturate(.7); pointer-events:none; }
+main { max-width: 74rem; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; }
+main.stretta { max-width: 46rem; }
+main.al-centro { text-align: center; }
+main h1 { margin-bottom: 1.2rem; }
+.voce { font-size: 1.1rem; line-height: 1.75; }
+.voce + .voce, .prosa + .prosa { margin-top: 1em; }
+.prosa { color: var(--carta); }
+.intro-schieramento { color: var(--carta-nota); max-width: 44rem; margin: .4rem 0 0; }
+
+/* --- l'hub: il marchio, il titolo, le tappe del viaggio --- */
+.hub .lockup { width: min(13rem, 55vw); height: auto; margin: 0 0 1.4rem;
+  filter: drop-shadow(0 0 22px var(--bagliore-oro)); }
+.tappe { display: grid; gap: 1rem; margin-top: 2.4rem; text-align: left; }
+.tappa-hub {
+  display: block; text-decoration: none; padding: 1.2rem 1.5rem;
+  border-radius: var(--raggio-m); border: 1px solid transparent;
+  background: linear-gradient(var(--vetro), var(--vetro)) padding-box,
+              linear-gradient(var(--abisso), var(--abisso)) padding-box,
+              linear-gradient(100deg, rgba(227,201,143,.45), rgba(53,182,232,.45)) border-box;
+  box-shadow: -4px 0 20px rgba(227,201,143,.06), 4px 0 20px rgba(53,182,232,.09);
+}
+.tappa-hub:hover {
+  background: linear-gradient(var(--vetro), var(--vetro)) padding-box,
+              linear-gradient(var(--abisso), var(--abisso)) padding-box,
+              var(--grad-bordo) border-box;
+  box-shadow: var(--bagliore);
+}
+.tappa-nome {
+  display: block; font-family: var(--font-display); font-weight: 700;
+  font-size: 1.05rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--oro-chiaro);
+}
+.tappa-dett { display: block; color: var(--carta-nota); font-size: .98rem; margin-top: .2rem; }
+.nota-link { margin-top: 2.2rem; font-size: .95rem; color: var(--carta-nota); }
+
+/* --- la mappa e le tre fedi --- */
+.mappa { margin: 2.4rem 0; }
+.mappa img { display: block; width: 100%; height: auto; }
+.mappa figcaption { text-align: center; color: var(--carta-nota); font-style: italic;
+  font-size: .95rem; padding-top: .9rem; }
+.fazioni { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.1rem; margin-top: 1.8rem; text-align: left; }
+.fazione {
+  cursor: pointer; font: inherit; color: var(--carta); text-align: left;
+  padding: 1.3rem 1.4rem; border-radius: var(--raggio-m);
+  border: 1px solid transparent;
+  background: linear-gradient(var(--vetro), var(--vetro)) padding-box,
+              linear-gradient(var(--abisso), var(--abisso)) padding-box,
+              linear-gradient(100deg, var(--bordo-fede-a), var(--bordo-fede-b)) border-box;
+  --bordo-fede-a: rgba(227,201,143,.5); --bordo-fede-b: rgba(53,182,232,.5);
+}
+.fazione:hover { box-shadow: var(--bagliore); }
+.faz-nome { display: block; font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; }
+.faz-testo { display: block; margin-top: .6rem; color: var(--carta-nota);
+  max-height: 0; overflow: hidden; opacity: 0; font-size: 1rem; line-height: 1.6; }
+.fazione[aria-expanded="true"] .faz-testo { max-height: 16rem; opacity: 1; }
+.fazione.speranza { --bordo-fede-a: rgba(227,201,143,.7); --bordo-fede-b: rgba(53,182,232,.8); }
+.fazione.speranza .faz-nome { color: var(--runa); }
+.fazione.controllo { --bordo-fede-a: rgba(159,180,199,.7); --bordo-fede-b: rgba(159,180,199,.35); }
+.fazione.controllo .faz-nome { color: #9FB4C7; }
+.fazione.oblio { --bordo-fede-a: rgba(169,64,54,.85); --bordo-fede-b: rgba(169,64,54,.35); }
+.fazione.oblio .faz-nome { color: #D2645A; }
+
+/* --- le griglie di card (guardiani, luoghi, volti, armature) --- */
+.griglia { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem); margin-top: 2rem; }
+.griglia.larga { grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+.card {
+  display: flex; flex-direction: column; overflow: hidden;
+  text-decoration: none; color: var(--carta);
+  border-radius: var(--raggio-m); border: 1px solid transparent;
+  background: linear-gradient(var(--vetro), var(--vetro)) padding-box,
+              linear-gradient(var(--abisso), var(--abisso)) padding-box,
+              linear-gradient(100deg, rgba(227,201,143,.45), rgba(53,182,232,.45)) border-box;
+  box-shadow: -4px 0 20px rgba(227,201,143,.06), 4px 0 20px rgba(53,182,232,.09);
+}
+a.card:hover {
+  background: linear-gradient(var(--vetro), var(--vetro)) padding-box,
+              linear-gradient(var(--abisso), var(--abisso)) padding-box,
+              var(--grad-bordo) border-box;
+  box-shadow: var(--bagliore);
+}
+.card img { display: block; width: 100%; height: 15rem; object-fit: cover;
+  object-position: top center; background: var(--notte); }
+.card .vela { display: block; padding: .9rem 1.1rem 1.1rem; }
+.card .nome { display: block; font-family: var(--font-display); font-weight: 700;
+  font-size: .92rem; line-height: 1.25; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--oro-chiaro); }
+.card .dett { font-size: .92rem; color: var(--carta-nota); margin-top: .3rem; }
+
+/* La card di chi aspetta la ratifica: sagoma, niente scheda — la stessa
+   forma delle «sigillate» della Galleria. */
+.card.futura { cursor: default; border: 1px dashed rgba(227,201,143,.3); box-shadow: none;
+  background: radial-gradient(circle at 50% 45%, rgba(53,182,232,.09), transparent 62%),
+              rgba(7,11,18,.55); }
+.card.futura .sagoma { display: grid; place-content: center; height: 15rem;
+  color: var(--oro-chiaro); opacity: .7; filter: drop-shadow(0 0 8px var(--bagliore-runa)); }
+.card.futura .attesa { font-family: var(--font-display); font-weight: 600;
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+
+/* --- i contatori del canone (come i numeri della home) --- */
+.contatori { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem; margin: 1.6rem 0 2rem; }
+.contatore { display: block; text-align: center; text-decoration: none; padding: 1.3rem .8rem; }
+a.contatore:hover { box-shadow: var(--bagliore); }
+.contatore .numero { display: inline-block; font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2.2rem, 4.5vw, 3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.contatore .etichetta { display: block; margin-top: .5rem; font-size: .92rem; color: var(--carta-nota); }
+.conta-schieramento { font-family: var(--font-display); font-size: .5em; letter-spacing: .08em;
+  color: var(--carta-nota); border: 1px solid rgba(227,201,143,.4); border-radius: 2rem;
+  padding: .15em .7em; vertical-align: .35em; margin-left: .5rem; -webkit-text-fill-color: var(--carta-nota); }
+
+/* --- la scheda: tavola grande, dati, prosa --- */
+.scheda .indietro { display: table; margin-bottom: 1.2rem; text-decoration: none;
+  font-family: var(--font-display); font-weight: 700; font-size: .85rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--oro-chiaro); }
+.scheda .indietro:hover { color: var(--runa); }
+.scheda-corpo { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 2.4rem; align-items: start; margin-top: 1rem; }
+.tavola img { display: block; width: 100%; height: auto; }
+.dato { display: flex; gap: .8rem; padding: .55rem 0; border-bottom: 1px solid rgba(227,201,143,.16); }
+.dato-nome { flex: 0 0 6.5rem; font-family: var(--font-display); font-weight: 700;
+  font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--oro); padding-top: .2rem; }
+.dato-valore { color: var(--carta); }
+.scheda-testi .prosa { margin-top: 1.1em; }
+.scheda-testi .bottone-secondario { margin-top: 1.6rem; }
+
+/* --- il Numero 1 --- */
+.cover { width: min(16rem, 70vw); height: auto; margin: .5rem 0 1.8rem; transform: rotate(-2deg); }
+.numero1 .bottone-primario { margin-top: 1.6rem; }
+
+/* --- il viaggio a sblocchi: tappe chiuse col lucchetto, la prossima in oro --- */
+.barra-sito nav a.bloccata, .tappa-hub.bloccata { opacity: .45; cursor: not-allowed; }
+.barra-sito nav a.bloccata::before { content: "\1F512\00a0"; font-size: .75em; }
+.tappa-hub.bloccata .tappa-nome::after { content: " \1F512"; font-size: .8em; }
+.tappa-hub.bloccata:hover { box-shadow: none; }
+.barra-sito nav a.prossima { color: var(--oro-chiaro); }
+.barra-sito nav a.prossima::before { content: "\25C6\00a0"; font-size: .7em; vertical-align: .12em; color: var(--runa); }
+.tappa-hub.prossima {
+  background: linear-gradient(var(--vetro), var(--vetro)) padding-box,
+              linear-gradient(var(--abisso), var(--abisso)) padding-box,
+              var(--grad-bordo) border-box;
+  box-shadow: var(--bagliore);
+}
+.tappa-hub.prossima .tappa-nome::before { content: "\25C6 "; font-size: .7em; vertical-align: .12em; color: var(--runa); }
+@media (prefers-reduced-motion: no-preference) {
+  .barra-sito nav a.prossima::before, .tappa-hub.prossima .tappa-nome::before {
+    animation: brilla 2.6s ease-in-out infinite; display: inline-block; }
+  @keyframes brilla { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+  .scrollone { animation: scrollone .4s ease; }
+  @keyframes scrollone {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-.35rem); }
+    60% { transform: translateX(.3rem); }
+  }
+  .tappa-hub, .card, .fazione, .contatore { transition: box-shadow .35s ease, transform .35s ease; }
+  .tappa-hub:hover, a.card:hover, a.contatore:hover { transform: translateY(-3px); }
+  .tappa-hub.bloccata:hover { transform: none; }
+}
+
+/* Il respiro del Mondo: la mappa sul fondo, che scorre piano. */
+.mappa-fondale { position: fixed; inset: -6%; z-index: -1; opacity: .08;
+  background: url("../assets/mappa-astralis.jpg") center/cover no-repeat;
+  filter: saturate(.7); pointer-events: none; }
 @media (prefers-reduced-motion: no-preference) {
   @view-transition { navigation: auto; }
-  html.js .scena { opacity:0; transform:translateY(1.4rem); }
-  html.js .scena.visto { opacity:1; transform:none;
-    transition:opacity .8s ease, transform .8s cubic-bezier(.2,.6,.25,1); }
-  .mappa-fondale { animation:panmappa 70s ease-in-out infinite alternate; }
+  .mappa-fondale { animation: panmappa 70s ease-in-out infinite alternate; }
   @keyframes panmappa {
-    from { transform:scale(1.05); }
-    to   { transform:scale(1.14) translate(-2%,-1.5%); }
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.14) translate(-2%,-1.5%); }
   }
 }
 
-@media (max-width:760px) {
-  .scheda-corpo { grid-template-columns:1fr; }
-  .card img { height:12rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .card, .tappa-hub, .fazione, .burger span { transition:none; }
+@media (max-width: 760px) {
+  main { padding-top: 2.2rem; }
+  .scheda-corpo { grid-template-columns: 1fr; }
+  .card img, .card.futura .sagoma { height: 12rem; }
 }

@@ -3,33 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Rurik Dane — evoluzione — Il Mondo di RuneGuardians</title>
+<title>Rurik Dane — evoluzione — Il Mondo — RuneGuardians</title>
+<meta name="description" content="Area riservata agli iscritti di RuneGuardians.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Rurik Dane — evoluzione — Il Mondo — RuneGuardians">
+<meta property="og:description" content="Area riservata agli iscritti di RuneGuardians.">
+<meta property="og:image" content="https://ninefold-saga.com/assets/cover-fronte.jpg">
+<meta property="og:url" content="https://ninefold-saga.com/mondo-x7kv49qe/armature.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/logo-lockup.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Changa:wght@600;700;800&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/rune.css?v=58bb48a900">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-<header class="barra">
-  <a class="marchio" href="index.html">
-    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
-  <button class="burger" aria-label="Apri il menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+<header class="barra-sito">
+  <a class="marchio" href="../index.html">
+    <img src="../assets/wordmark-barra.png" alt="RuneGuardians" width="736" height="211"></a>
+  <nav hidden><a href="index.html">Inizio</a><a href="astralis.html">Astralis</a><a href="luoghi.html">Luoghi</a><a href="guardiani.html">Guardiani</a><a href="volti.html">Volti</a><a href="armature.html" class="qui">Armature</a><a href="numero1.html">Numero 1</a></nav>
+  <a class="barra-cta bottone-primario" href="https://www.kickstarter.com/projects/1539499967/runeguardians-il-peso-del-ritorno-numero-1" target="_blank" rel="noopener"><span class="barra-cta-lungo">Sostieni su&nbsp;</span>Kickstarter</a>
+  <button class="barra-burger" aria-label="Apri il menu" aria-expanded="false">☰</button>
 </header>
-<nav class="tenda" hidden>
-  <a href='index.html'>Il Mondo — inizio</a><a href='astralis.html'>Astralis</a><a href='luoghi.html'>I Luoghi</a><a href='guardiani.html'>I Guardiani</a><a href='volti.html'>I Volti</a><a href='armature.html' class=qui>Le Armature</a><a href='numero1.html'>Il Numero 1</a>
-</nav>
 
 <main class="scheda">
   <a class="indietro" href="armature.html">&larr; Le Armature</a>
-  <h1>Rurik Dane — evoluzione</h1>
+  <h1 class="titolo-pagina">Rurik Dane — evoluzione</h1>
   <div class="scheda-corpo">
     <a class="tavola" href="assets/evoluzioni-rurik-dane.jpg" target="_blank" rel="noopener">
-      <img src="assets/evoluzioni-rurik-dane.jpg" alt="Rurik Dane — evoluzione"></a>
+      <img class="immagine-luce" src="assets/evoluzioni-rurik-dane.jpg" alt="Rurik Dane — evoluzione"></a>
     <div class="scheda-testi">
       <div class='dato'><span class='dato-nome'>Guardiano</span><span class='dato-valore'>Rurik Dane</span></div><div class='dato'><span class='dato-nome'>Totem</span><span class='dato-valore'>Spinosauro</span></div><div class='dato'><span class='dato-nome'>Fazione</span><span class='dato-valore'>Oblio/Controllo</span></div>
       
@@ -38,38 +43,15 @@
   </div>
 </main>
 <footer>
-  <p>Area riservata agli iscritti: il link è il tuo — se vuoi regalarlo a
-     qualcuno, digli anche di <a href="../index.html">iscriversi</a>.</p>
-  <p>© 2026 Enzo Pellacani — RuneGuardians™</p>
+  <div class="colonna">
+    <p class="social"><a href="https://www.instagram.com/rune.guardians/" rel="me noopener">Instagram</a> · <a href="https://x.com/Runessaga" rel="me noopener">X</a></p>
+    <p class="legale">Il form iscrizioni è gestito da MailerLite. Usiamo la tua email solo per gli avvisi di RuneGuardians: aggiornamenti sulla campagna e sul fumetto, pochi ma quelli che contano. Nessuna cessione a terzi, disiscrizione in un clic da ogni email. <a href="../privacy.html">Privacy</a></p>
+    <p class="firma">© 2026 Enzo Pellacani — RuneGuardians™ · ninefold-saga.com</p>
+  </div>
 </footer>
+<a class="torna-su" href="#top" aria-label="Torna su"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 14.5V3.5M3.8 8.7L9 3.5l5.2 5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<script src="../assets/rune.js?v=7ab32db895" defer></script>
 <script>
-  var burger = document.querySelector(".burger");
-  var tenda = document.querySelector(".tenda");
-  burger.addEventListener("click", function () {
-    var aperto = !tenda.hidden;
-    tenda.hidden = aperto;
-    burger.setAttribute("aria-expanded", String(!aperto));
-    burger.classList.toggle("aperto", !aperto);
-  });
-  tenda.addEventListener("click", function (e) {
-    if (e.target === tenda) burger.click();
-  });
-  addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !tenda.hidden) burger.click();
-  });
-  var scena = document.querySelector("main");
-  if (scena) {
-    scena.classList.add("scena");
-    new IntersectionObserver(function (voci, o) {
-      voci.forEach(function (v) {
-        if (v.isIntersecting) { v.target.classList.add("visto"); o.unobserve(v.target); }
-      });
-    }, { threshold: 0.05 }).observe(scena);
-  }
-
-  // Il viaggio a sblocchi: ogni area vista apre la successiva (per utente,
-  // nella memoria del browser). La prossima tappa e' in evidenza, le
-  // altre portano il lucchetto.
   (function () {
     var ORDINE = ["index.html", "astralis.html", "luoghi.html",
                   "guardiani.html", "volti.html", "armature.html",
@@ -127,7 +109,7 @@
         link.classList.add("prossima");
       }
     }
-    document.querySelectorAll(".tenda a, .tappa-hub").forEach(decora);
+    document.querySelectorAll(".barra-sito nav a, .tappa-hub").forEach(decora);
   })();
 </script>
 </body>
