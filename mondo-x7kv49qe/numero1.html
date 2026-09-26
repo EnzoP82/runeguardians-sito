@@ -24,18 +24,49 @@
 <header class="barra-sito">
   <a class="marchio" href="../index.html">
     <img src="../assets/wordmark-barra.png" alt="RuneGuardians" width="736" height="211"></a>
-  <nav hidden><a href="index.html">Inizio</a><a href="astralis.html">Astralis</a><a href="luoghi.html">Luoghi</a><a href="guardiani.html">Guardiani</a><a href="volti.html">Volti</a><a href="armature.html">Armature</a><a href="numero1.html" class="qui">Numero 1</a></nav>
+  <span class="barra-area">Il Mondo · area riservata</span><nav hidden><a href="index.html">Il Mondo</a><a href="astralis.html">Astralis</a><a href="luoghi.html">Luoghi</a><a href="guardiani.html">Guardiani</a><a href="volti.html">Volti</a><a href="armature.html">Armature</a><a href="numero1.html" class="qui">Numero 1</a></nav>
   <a class="barra-cta bottone-primario" href="https://www.kickstarter.com/projects/1539499967/runeguardians-il-peso-del-ritorno-numero-1" target="_blank" rel="noopener"><span class="barra-cta-lungo">Sostieni su&nbsp;</span>Kickstarter</a>
   <button class="barra-burger" aria-label="Apri il menu" aria-expanded="false">☰</button>
 </header>
 
 <main class="sezione stretta al-centro numero1">
-  <img class="cover immagine-luce" src="../assets/cover-fronte.jpg"
-       alt="Copertina del Numero 1 — Il Peso del Ritorno">
   <h1 class="titolo-pagina">Dove tutto comincia</h1>
+  <div class="albo-scena">
+    <figure class="albo">
+      <a class="albo-libro apri-lettore" href="assets/albo-00.jpg">
+        <img class="tavola-sotto" src="assets/albo-02.jpg" alt="" aria-hidden="true" loading="lazy">
+        <img class="copertina" src="assets/albo-00.jpg" alt="Copertina del Numero 1: Il Peso del Ritorno. Clicca per aprire il lettore e sfogliare l'albo" width="1000" height="1683">
+      </a>
+      <figcaption>Serie 1 · Numero 1 — passa sopra per sfogliare, clicca per leggerlo</figcaption>
+    </figure>
+  </div>
   <p class='voce'>Tutto comincia con Il Peso del Ritorno. Emeric Fenn, un ragazzo di un borgo di mare, recupera relitti: si immerge dove gli altri non scendono. Quello che riporta a galla non è un rottame.</p><p class='voce'>Le 48 tavole del primo albo sono pronte: illustrate, letterate, chiuse per la stampa. La campagna Kickstarter è aperta: il bottone in alto ti ci porta.</p>
   <a class="bottone-primario" href="../index.html">Torna alla pagina principale</a>
 </main>
+<dialog class="lettore" data-pagine='["assets/albo-00.jpg", "assets/albo-01.jpg", "assets/albo-02.jpg", "assets/albo-03.jpg", "assets/albo-04.jpg", "assets/albo-05.jpg", "assets/albo-06.jpg", "assets/albo-07.jpg", "assets/albo-08.jpg", "assets/albo-09.jpg", "assets/albo-10.jpg", "assets/albo-11.jpg", "assets/albo-12.jpg", "assets/albo-13.jpg", "assets/albo-14.jpg", "assets/albo-15.jpg", "assets/albo-16.jpg", "assets/albo-17.jpg", "assets/albo-18.jpg", "assets/albo-19.jpg", "assets/albo-20.jpg", "assets/albo-21.jpg", "assets/albo-22.jpg", "assets/albo-23.jpg", "assets/albo-24.jpg", "assets/albo-25.jpg", "assets/albo-26.jpg", "assets/albo-27.jpg", "assets/albo-28.jpg", "assets/albo-29.jpg", "assets/albo-30.jpg", "assets/albo-31.jpg", "assets/albo-32.jpg", "assets/albo-33.jpg", "assets/albo-34.jpg", "assets/albo-35.jpg", "assets/albo-36.jpg", "assets/albo-37.jpg", "assets/albo-38.jpg", "assets/albo-39.jpg", "assets/albo-40.jpg", "assets/albo-41.jpg", "assets/albo-42.jpg", "assets/albo-43.jpg", "assets/albo-44.jpg", "assets/albo-45.jpg", "assets/albo-46.jpg", "assets/albo-47.jpg", "assets/albo-48.jpg", "assets/albo-49.jpg", "assets/albo-50.jpg", "assets/albo-51.jpg"]' id="lettore" aria-label="Lettore dell'albo" data-pagine="[]">
+  <div class="lettore-telaio">
+    <button class="lettore-chiudi" type="button" aria-label="Chiudi il lettore">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M5 5l12 12M17 5L5 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="lettore-libro" role="group" aria-label="Pagine dell'albo">
+      <div class="lettore-pagina lettore-sx lettore-vuota"><img alt="" decoding="async"></div>
+      <div class="lettore-pagina lettore-dx lettore-vuota"><img alt="" decoding="async"></div>
+      <div class="lettore-foglio" hidden aria-hidden="true">
+        <div class="lettore-faccia lettore-fronte"><img alt="" decoding="async"></div>
+        <div class="lettore-faccia lettore-retro"><img alt="" decoding="async"></div>
+      </div>
+    </div>
+    <div class="lettore-barra">
+      <button class="lettore-bottone lettore-indietro" type="button" aria-label="Pagina precedente">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M14 4l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="lettore-indicatore" aria-live="polite">Copertina</p>
+      <button class="lettore-bottone lettore-avanti" type="button" aria-label="Pagina successiva">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M8 4l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</dialog>
 <footer>
   <div class="colonna">
     <p class="social"><a href="https://www.instagram.com/rune.guardians/" rel="me noopener">Instagram</a> · <a href="https://x.com/Runessaga" rel="me noopener">X</a></p>
@@ -53,6 +84,9 @@
     var CHIAVE = "rg-mondo-viaggio";
     if (location.hash === "#ricomincia") { // per demo: riparte da capo
       try { localStorage.removeItem(CHIAVE); } catch (e) {}
+    }
+    if (location.hash === "#leggi") { // dalla newsletter: tutte le tappe aperte
+      try { localStorage.setItem(CHIAVE, JSON.stringify([0, 1, 2, 3, 4, 5, 6])); } catch (e) {}
     }
     var qui = "numero1.html";
     var idxQui = ORDINE.indexOf(qui);
@@ -105,6 +139,263 @@
     }
     document.querySelectorAll(".barra-sito nav a, .tappa-hub").forEach(decora);
   })();
+</script>
+<script>
+  (function () {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        !matchMedia("(pointer: fine)").matches) return;
+    var scena = document.querySelector(".albo-scena");
+    var albo = scena && scena.querySelector(".albo");
+    if (!albo) return;
+    scena.addEventListener("pointermove", function (e) {
+      var r = scena.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - .5;
+      var py = (e.clientY - r.top) / r.height - .5;
+      albo.style.transform = "rotate(2.5deg) rotateY(" + (px * 10).toFixed(2) +
+        "deg) rotateX(" + (-py * 8).toFixed(2) + "deg) translateZ(12px)";
+    });
+    scena.addEventListener("pointerleave", function () { albo.style.transform = ""; });
+  })();
+</script>
+<script>
+(function () {
+  "use strict";
+  var dialogo = document.getElementById("lettore");
+  if (!dialogo || typeof dialogo.showModal !== "function") return;
+  var pagine;
+  try { pagine = JSON.parse(dialogo.dataset.pagine || "[]"); } catch (e) { pagine = []; }
+  if (!Array.isArray(pagine) || !pagine.length) return;
+  var N = pagine.length;
+  var interne = Math.max(N - 2, 0);
+  var libro = dialogo.querySelector(".lettore-libro");
+  var sx = dialogo.querySelector(".lettore-sx");
+  var dx = dialogo.querySelector(".lettore-dx");
+  var foglio = dialogo.querySelector(".lettore-foglio");
+  var fronte = dialogo.querySelector(".lettore-fronte");
+  var retro = dialogo.querySelector(".lettore-retro");
+  var indietro = dialogo.querySelector(".lettore-indietro");
+  var avanti = dialogo.querySelector(".lettore-avanti");
+  var indicatore = dialogo.querySelector(".lettore-indicatore");
+  var chiudi = dialogo.querySelector(".lettore-chiudi");
+  if (!libro || !sx || !dx || !foglio || !fronte || !retro ||
+      !indietro || !avanti || !indicatore || !chiudi) return;
+  var imgSx = sx.querySelector("img"), imgDx = dx.querySelector("img");
+  var imgFronte = fronte.querySelector("img"), imgRetro = retro.querySelector("img");
+  if (!imgSx || !imgDx || !imgFronte || !imgRetro) return;
+
+  var telefono = window.matchMedia("(max-width: 760px)");
+  var ridotto = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // La durata dello sfoglio, in UN posto solo: da qui il timeout di
+  // sicurezza e, via --lettore-durata sul dialog, tutte le animazioni CSS.
+  var DURATA_SFOGLIO_MS = 950;
+  dialogo.style.setProperty("--lettore-durata", DURATA_SFOGLIO_MS + "ms");
+
+  /* viste: pari->retro solo a sinistra, dispari->ultima+retro */
+  // Stessa regola di lettore_albo.viste (Python): vista 0 = copertina sola
+  // a destra; interne (1..n-2) a coppie dispari-sinistra/pari-destra; se le
+  // interne sono dispari l'ultima resta a sinistra col retro a destra,
+  // altrimenti il retro chiude da solo a sinistra.
+  function viste(n) {
+    if (n <= 0) return [];
+    if (n === 1) return [[null, 0]];
+    var fine = n - 2, out = [[null, 0]], i = 1;
+    while (i + 1 <= fine) { out.push([i, i + 1]); i += 2; }
+    if (fine % 2 === 1) out.push([fine, n - 1]);
+    else out.push([n - 1, null]);
+    return out;
+  }
+  // Sul telefono una pagina per vista, sempre nel lato destro (la sinistra
+  // e' nascosta dal CSS), in sequenza 0..N-1.
+  function visteSingole(n) {
+    var out = [];
+    for (var i = 0; i < n; i++) out.push([null, i]);
+    return out;
+  }
+  function tabellaAttuale() { return telefono.matches ? visteSingole(N) : viste(N); }
+
+  var tabella = tabellaAttuale();
+  var corrente = 0;
+  var apertoDa = null;
+  var inCorso = false, pendente = null, timer = null;
+
+  function nome(p) {
+    if (p === 0) return "Copertina";
+    if (p === N - 1) return "Retrocopertina";
+    return "Pagina " + p;
+  }
+  function etichetta(v) {
+    var a = v[0], b = v[1];
+    if (telefono.matches) {
+      if (b === 0) return "Copertina";
+      if (b === N - 1) return "Retro";
+      return "pag. " + b + " di " + interne;
+    }
+    if (a === null) return "Copertina";
+    if (b === null) return "Retro";
+    if (b === N - 1) return "pag. " + a + " di " + interne + " \u00b7 Retro";
+    return "pag. " + a + "\u2013" + b + " di " + interne;
+  }
+  function metti(img, cornice, p) {
+    if (p === null || p === undefined) {
+      img.removeAttribute("src"); img.alt = "";
+      cornice.classList.add("lettore-vuota");
+    } else {
+      img.src = pagine[p]; img.alt = nome(p);
+      cornice.classList.remove("lettore-vuota");
+    }
+  }
+  function precarica(i) {
+    var v = tabella[i];
+    if (!v) return;
+    v.forEach(function (p) { if (p !== null) { var im = new Image(); im.src = pagine[p]; } });
+  }
+  function mostra(i) {
+    corrente = i;
+    var v = tabella[i];
+    metti(imgSx, sx, v[0]);
+    metti(imgDx, dx, v[1]);
+    indicatore.textContent = etichetta(v);
+    indietro.disabled = i === 0;
+    avanti.disabled = i === tabella.length - 1;
+    precarica(i - 1);
+    precarica(i + 1);
+  }
+  function chiudiFoglio() {
+    if (timer) { clearTimeout(timer); timer = null; }
+    foglio.classList.remove("lettore-gira", "lettore-verso-avanti", "lettore-verso-indietro");
+    libro.classList.remove("lettore-sfoglia-avanti", "lettore-sfoglia-indietro");
+    foglio.hidden = true;
+    inCorso = false;
+    pendente = null;
+  }
+  function vai(i) {
+    if (inCorso || i < 0 || i >= tabella.length || i === corrente) return;
+    if (ridotto.matches) { mostra(i); return; }
+    var da = tabella[corrente], a = tabella[i];
+    var inAvanti = i > corrente;
+    inCorso = true;
+    if (telefono.matches) {
+      // il foglio copre l'unica pagina: fronte = la pagina attuale; sotto,
+      // gia' la nuova, che si scopre quando il foglio si mette di taglio
+      metti(imgFronte, fronte, da[1]);
+      metti(imgRetro, retro, null);
+      metti(imgDx, dx, a[1]);
+    } else if (inAvanti) {
+      // la pagina destra ruota verso sinistra: sul retro la nuova sinistra;
+      // sotto, la nuova destra si scopre man mano
+      metti(imgFronte, fronte, da[1]);
+      metti(imgRetro, retro, a[0]);
+      metti(imgDx, dx, a[1]);
+    } else {
+      // speculare: la sinistra ruota verso destra, sul retro la nuova destra
+      metti(imgFronte, fronte, da[0]);
+      metti(imgRetro, retro, a[1]);
+      metti(imgSx, sx, a[0]);
+    }
+    foglio.classList.add(inAvanti ? "lettore-verso-avanti" : "lettore-verso-indietro");
+    // la pagina sotto riceve l'ombra proiettata (CSS: .lettore-sfoglia-*)
+    libro.classList.add(inAvanti ? "lettore-sfoglia-avanti" : "lettore-sfoglia-indietro");
+    foglio.hidden = false;
+    void foglio.offsetWidth;  // reflow: l'animazione parte dallo stato di riposo
+    pendente = function () { chiudiFoglio(); mostra(i); };
+    foglio.classList.add("lettore-gira");
+    // timeout di sicurezza, poco oltre la durata: se animationend non arriva
+    // (scheda in secondo piano, animazioni spente) si chiude comunque
+    timer = setTimeout(function () { if (pendente) pendente(); }, DURATA_SFOGLIO_MS + 200);
+  }
+  // Solo la fine dell'animazione del foglio stesso: quelle dei veli sulle
+  // facce e delle ombre sulle pagine arrivano qui con un altro target.
+  foglio.addEventListener("animationend", function (e) {
+    if (e.target === foglio && pendente) pendente();
+  });
+
+  function apri(da) {
+    apertoDa = da || null;
+    chiudiFoglio();
+    tabella = tabellaAttuale();
+    mostra(0);
+    dialogo.showModal();
+    chiudi.focus();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".apri-lettore"), function (el) {
+    el.addEventListener("click", function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      apri(el);
+    });
+  });
+  chiudi.addEventListener("click", function () { dialogo.close(); });
+  indietro.addEventListener("click", function () { vai(corrente - 1); });
+  avanti.addEventListener("click", function () { vai(corrente + 1); });
+
+  // Il clic sulle pagine: meta' destra del telaio avanti, sinistra indietro.
+  // Lo swipe (pointer events, soglia 40px) inibisce il clic che lo segue.
+  var gesto = null, swipato = false;
+  libro.addEventListener("pointerdown", function (e) {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    gesto = { x: e.clientX, y: e.clientY };
+  });
+  libro.addEventListener("pointerup", function (e) {
+    if (!gesto) return;
+    var ddx = e.clientX - gesto.x, ddy = e.clientY - gesto.y;
+    gesto = null;
+    if (Math.abs(ddx) >= 40 && Math.abs(ddx) > Math.abs(ddy)) {
+      swipato = true;
+      vai(ddx < 0 ? corrente + 1 : corrente - 1);
+    }
+  });
+  libro.addEventListener("pointercancel", function () { gesto = null; });
+  libro.addEventListener("click", function (e) {
+    if (swipato) { swipato = false; return; }
+    var r = libro.getBoundingClientRect();
+    vai(e.clientX - r.left > r.width / 2 ? corrente + 1 : corrente - 1);
+  });
+  // Esc lo gestisce il <dialog>; qui le frecce e la trappola del Tab fra i
+  // bottoni (showModal rende gia' inerte il resto della pagina).
+  dialogo.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { e.preventDefault(); vai(corrente - 1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); vai(corrente + 1); }
+    else if (e.key === "Tab") {
+      var fuochi = Array.prototype.filter.call(
+        dialogo.querySelectorAll("button"), function (b) { return !b.hidden && !b.disabled; });
+      if (!fuochi.length) return;
+      var primo = fuochi[0], ultimo = fuochi[fuochi.length - 1];
+      if (e.shiftKey && document.activeElement === primo) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primo.focus(); }
+    }
+  });
+  // Il clic sul fondo, fuori dal telaio delle pagine e dalla barra, chiude.
+  dialogo.addEventListener("click", function (e) {
+    var t = e.target;
+    if (t === dialogo || t.classList.contains("lettore-telaio")) dialogo.close();
+  });
+  dialogo.addEventListener("close", function () {
+    chiudiFoglio();
+    if (apertoDa && typeof apertoDa.focus === "function") apertoDa.focus();
+    apertoDa = null;
+  });
+  // Se cambia la larghezza (telefono <-> schermo) si rifa' la tabella e si
+  // resta sulla stessa pagina.
+  function ricalcola() {
+    var v = tabella[corrente] || [null, 0];
+    var p = v[0] !== null ? v[0] : v[1];
+    chiudiFoglio();
+    tabella = tabellaAttuale();
+    var i = 0;
+    for (var k = 0; k < tabella.length; k++) {
+      if (tabella[k][0] === p || tabella[k][1] === p) { i = k; break; }
+    }
+    mostra(i);
+  }
+  if (typeof telefono.addEventListener === "function") telefono.addEventListener("change", ricalcola);
+  else if (typeof telefono.addListener === "function") telefono.addListener(ricalcola);
+})();
+</script><script>
+  if (location.hash === "#leggi") {
+    var apri = document.querySelector(".apri-lettore");
+    if (apri) apri.click();
+  }
 </script>
 </body>
 </html>

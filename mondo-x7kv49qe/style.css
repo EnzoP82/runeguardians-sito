@@ -8,10 +8,15 @@
 
 /* La barra: sette voci invece di cinque, che sui portatili vanno a capo
    invece di uscire dallo schermo. */
+.barra-area { flex: none; font-family: var(--font-display); font-weight: 600;
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--carta-nota); border: 1px solid rgba(227,201,143,.35);
+  border-radius: 999px; padding: .3rem .7rem; white-space: nowrap; }
+@media (max-width: 760px) { .barra-area { display: none; } }
 .barra-sito nav { flex-wrap: wrap; justify-content: center; row-gap: .1rem; }
-@media (min-width: 761px) and (max-width: 1180px) {
-  .barra-sito nav { gap: .9rem; }
-  .barra-sito nav a { font-size: .82rem; }
+@media (min-width: 761px) and (max-width: 1500px) {
+  .barra-sito nav { gap: .8rem; }
+  .barra-sito nav a { font-size: .8rem; }
 }
 
 main { max-width: 74rem; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; }
@@ -142,8 +147,49 @@ a.contatore:hover { box-shadow: var(--bagliore); }
 .scheda-testi .prosa { margin-top: 1.1em; }
 .scheda-testi .bottone-secondario { margin-top: 1.6rem; }
 
-/* --- il Numero 1 --- */
-.cover { width: min(16rem, 70vw); height: auto; margin: .5rem 0 1.8rem; transform: rotate(-2deg); }
+/* --- il Numero 1: l'albo da sfogliare (lo stesso di /lancio/) --- */
+.numero1 .albo-scena { perspective: 1000px; position: relative;
+  display: flex; justify-content: center; margin: .8rem auto 2.4rem; }
+.albo-scena::before {
+  content: ""; position: absolute; inset: -22% -30%;
+  background:
+    radial-gradient(closest-side, rgba(53,182,232,.28) 8%, rgba(53,182,232,.14) 34%, transparent 62%),
+    radial-gradient(closest-side, rgba(227,201,143,.2), rgba(227,201,143,.08) 48%, transparent 76%);
+  filter: blur(4px); z-index: 0; pointer-events: none;
+}
+.albo { position: relative; z-index: 1; margin: 0; width: min(20rem, 78vw);
+  transform: rotate(2.5deg); transition: transform .18s ease-out; will-change: transform; }
+.albo-libro { position: relative; display: block; transform-style: preserve-3d;
+  border-radius: var(--raggio-s); cursor: pointer; }
+.albo img { display: block; width: 100%; height: auto; border-radius: var(--raggio-s);
+  border: 1.5px solid transparent; background: var(--grad-bordo) border-box;
+  box-shadow: -14px 0 50px rgba(227,201,143,.18), 14px 0 50px rgba(53,182,232,.26),
+              0 26px 60px rgba(0,0,0,.7); }
+.albo-libro .tavola-sotto { position: absolute; inset: 0; height: 100%; object-fit: cover;
+  box-shadow: inset 12px 0 24px rgba(0,0,0,.45); }
+.albo-libro .copertina { position: relative; z-index: 1;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transition: clip-path .9s cubic-bezier(.25,.6,.2,1), filter .9s ease; }
+.albo figcaption { text-align: center; font-size: .9rem; color: var(--carta-nota);
+  padding-top: 1rem; font-style: italic; }
+@media (prefers-reduced-motion: no-preference) {
+  .albo-scena::before { animation: alone-vivo 6s ease-in-out infinite alternate; }
+  @keyframes alone-vivo { from { opacity: .75; } to { opacity: 1; } }
+}
+@media (prefers-reduced-motion: no-preference) and (pointer: fine) {
+  .albo-scena:hover .copertina, .albo-scena:focus-within .copertina {
+    clip-path: polygon(0 0, 100% 0, 100% 0%, 0 100%);
+    filter: drop-shadow(12px 12px 20px rgba(0,0,0,.6));
+  }
+  .albo-libro::after {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    border-radius: var(--raggio-s);
+    background: linear-gradient(135deg, transparent 40%, rgba(233,225,204,.32) 48%,
+                                rgba(8,14,22,.5) 53%, transparent 63%);
+    opacity: 0; transition: opacity .9s ease;
+  }
+  .albo-scena:hover .albo-libro::after, .albo-scena:focus-within .albo-libro::after { opacity: 1; }
+}
 .numero1 .bottone-primario { margin-top: 1.6rem; }
 
 /* --- il viaggio a sblocchi: tappe chiuse col lucchetto, la prossima in oro --- */
@@ -192,4 +238,202 @@ a.contatore:hover { box-shadow: var(--bagliore); }
   main { padding-top: 2.2rem; }
   .scheda-corpo { grid-template-columns: 1fr; }
   .card img, .card.futura .sagoma { height: 12rem; }
+}
+
+
+/* --------------------------------------------------------- lettore --- */
+/* Il lettore dell'albo (scripts/rune/lettore_albo.py): un <dialog> a tutto
+   schermo con le due pagine affiancate al centro, la barra sotto, il
+   bottone chiudi in alto a destra. Lo sfoglio e' un foglio 3D sovrapposto
+   che ruota attorno al dorso. Sul telefono una pagina per volta. */
+.lettore {
+  border: 0; padding: 0; margin: 0;
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  background: transparent; color: var(--carta);
+  font-family: var(--font-testo);
+  overflow: hidden;
+}
+.lettore::backdrop { background: rgba(4, 7, 12, .96); }
+.lettore-telaio {
+  /* altezza della pagina: ~88vh, ma mai piu' di quanto lasci la barra, ne'
+     piu' larga di meta' schermo (due pagine 1100:1696 affiancate) */
+  --lettore-h: min(88svh, calc(100svh - 8.5rem), calc((100vw - 4rem) * 0.7709));
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(.8rem, 2vw, 1.4rem);
+  padding: clamp(1rem, 3vw, 2rem) clamp(.8rem, 3vw, 2rem);
+}
+.lettore-libro {
+  position: relative; display: flex;
+  height: var(--lettore-h); aspect-ratio: 2200 / 1696;
+  perspective: 2600px;
+  cursor: pointer; touch-action: pan-y;
+  user-select: none; -webkit-user-select: none;
+}
+.lettore-pagina {
+  position: relative; width: 50%; height: 100%;
+  background: var(--notte); overflow: hidden;
+  border: 1px solid rgba(227, 201, 143, .35);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .6);
+}
+/* --lettore-dorso: la direzione del gradiente che parte dal dorso (90deg =
+   dorso a sinistra, 270deg = dorso a destra); lo usano le ombre qui sotto */
+.lettore-sx { --lettore-dorso: 270deg; border-right: 0; border-radius: var(--raggio-m) 0 0 var(--raggio-m); box-shadow: -14px 0 50px rgba(227, 201, 143, .16), 0 30px 70px rgba(0, 0, 0, .6); }
+.lettore-dx { --lettore-dorso: 90deg; border-left: 0; border-radius: 0 var(--raggio-m) var(--raggio-m) 0; box-shadow: 14px 0 50px rgba(53, 182, 232, .24), 0 30px 70px rgba(0, 0, 0, .6); }
+.lettore-pagina img, .lettore-faccia img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+.lettore-vuota { visibility: hidden; }
+/* l'ombra proiettata dal foglio sulla pagina che viene scoperta: forte
+   vicino al dorso all'inizio del giro, sparisce quando il foglio atterra */
+.lettore-pagina::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; opacity: 0; pointer-events: none;
+  background: linear-gradient(var(--lettore-dorso, 90deg), rgba(0, 0, 0, .62), rgba(0, 0, 0, .26) 30%, rgba(0, 0, 0, 0) 68%);
+}
+.lettore-sfoglia-avanti .lettore-dx::before, .lettore-sfoglia-indietro .lettore-sx::before {
+  animation: lettore-ombra-sotto var(--lettore-durata, .95s) cubic-bezier(.4, .02, .2, 1) both;
+}
+/* l'ombra del dorso, solo quando ci sono due pagine */
+.lettore-libro::after {
+  content: ""; position: absolute; z-index: 1; pointer-events: none;
+  top: 0; bottom: 0; left: 50%; width: 7%; transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .5), transparent);
+}
+.lettore-libro:has(.lettore-vuota)::after { display: none; }
+/* il foglio che gira: due facce, ruota attorno al bordo interno. Lo
+   sfoglio e' un'animazione a keyframes (non una transition): rotazione,
+   un leggero sollevamento a meta' giro (skew + scale, origine sul dorso)
+   e i veli di luce e ombra sulle facce, tutti sincronizzati sulla stessa
+   durata --lettore-durata, che il JS mette sul dialog (DURATA_SFOGLIO_MS). */
+.lettore-foglio {
+  position: absolute; z-index: 2; top: 0; height: 100%; width: 50%;
+  transform-style: preserve-3d; pointer-events: none;
+}
+.lettore-foglio[hidden] { display: none; }
+.lettore-verso-avanti { left: 50%; transform-origin: left center; }
+.lettore-verso-indietro { left: 0; transform-origin: right center; }
+.lettore-faccia {
+  position: absolute; inset: 0; overflow: hidden;
+  background: var(--notte);
+  border: 1px solid rgba(227, 201, 143, .35);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+.lettore-retro { transform: rotateY(180deg) translateZ(0); }
+.lettore-verso-avanti .lettore-fronte, .lettore-verso-indietro .lettore-retro { --lettore-dorso: 90deg; border-left: 0; border-radius: 0 var(--raggio-m) var(--raggio-m) 0; }
+.lettore-verso-avanti .lettore-retro, .lettore-verso-indietro .lettore-fronte { --lettore-dorso: 270deg; border-right: 0; border-radius: var(--raggio-m) 0 0 var(--raggio-m); }
+/* i veli sulla faccia: ::before la luce che scorre lungo l'asse dello
+   sfoglio, ::after l'ombra che si addensa verso il dorso a meta' giro */
+.lettore-faccia::before {
+  content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background: linear-gradient(var(--lettore-dorso, 90deg), rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, .17) 50%, rgba(255, 255, 255, 0) 75%);
+  background-size: 200% 100%; background-position: 100% 0;
+}
+.lettore-faccia::after {
+  content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background: linear-gradient(var(--lettore-dorso, 90deg), rgba(0, 0, 0, .58), rgba(0, 0, 0, .26) 32%, rgba(0, 0, 0, 0) 72%);
+}
+.lettore-verso-avanti.lettore-gira { animation: lettore-sfoglio-avanti var(--lettore-durata, .95s) both; }
+.lettore-verso-indietro.lettore-gira { animation: lettore-sfoglio-indietro var(--lettore-durata, .95s) both; }
+.lettore-gira .lettore-faccia { animation: lettore-ombra-base var(--lettore-durata, .95s) ease-in-out both; }
+.lettore-gira .lettore-faccia::before { animation: lettore-velo-luce var(--lettore-durata, .95s) ease-in-out both; }
+.lettore-gira .lettore-faccia::after { animation: lettore-velo-ombra var(--lettore-durata, .95s) ease-in-out both; }
+/* la curva in due tratti: parte lenta e si stacca (cubic-bezier(.4,.02,.75,.7)),
+   poi atterra piano (cubic-bezier(.25,.3,.2,1)); le pendenze al giunto
+   coincidono (1.2), quindi nessuno scatto a meta' giro */
+@keyframes lettore-sfoglio-avanti {
+  0%   { transform: rotateY(0deg) skewY(0deg) scale(1); animation-timing-function: cubic-bezier(.4, .02, .75, .7); }
+  50%  { transform: rotateY(-90deg) skewY(-1.4deg) scale(.985); animation-timing-function: cubic-bezier(.25, .3, .2, 1); }
+  100% { transform: rotateY(-180deg) skewY(0deg) scale(1); }
+}
+@keyframes lettore-sfoglio-indietro {
+  0%   { transform: rotateY(0deg) skewY(0deg) scale(1); animation-timing-function: cubic-bezier(.4, .02, .75, .7); }
+  50%  { transform: rotateY(90deg) skewY(1.4deg) scale(.985); animation-timing-function: cubic-bezier(.25, .3, .2, 1); }
+  100% { transform: rotateY(180deg) skewY(0deg) scale(1); }
+}
+@keyframes lettore-velo-luce {
+  0%   { opacity: 0; background-position: 100% 0; }
+  22%  { opacity: 1; }
+  58%  { opacity: .3; }
+  100% { opacity: 0; background-position: 0% 0; }
+}
+@keyframes lettore-velo-ombra {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes lettore-ombra-base {
+  0%   { box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+  30%  { box-shadow: 0 16px 38px rgba(0, 0, 0, .48); }
+  70%  { box-shadow: 0 16px 38px rgba(0, 0, 0, .48); }
+  100% { box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+}
+@keyframes lettore-ombra-sotto {
+  0%   { opacity: 1; }
+  45%  { opacity: .75; }
+  100% { opacity: 0; }
+}
+/* la barra: indietro, indicatore, avanti */
+.lettore-barra {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(.8rem, 2.5vw, 1.6rem);
+}
+.lettore-indicatore {
+  margin: 0; min-width: 12rem; text-align: center;
+  font-family: var(--font-display); font-weight: 700; font-size: .9rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--oro-chiaro);
+}
+.lettore-bottone, .lettore-chiudi {
+  display: flex; align-items: center; justify-content: center;
+  width: 3.2rem; height: 3.2rem;
+  border-radius: var(--raggio-s);
+  color: var(--oro-chiaro); cursor: pointer;
+  border: 1.5px solid transparent;
+  background: linear-gradient(var(--notte), var(--notte)) padding-box,
+              var(--grad-bordo) border-box;
+  box-shadow: var(--bagliore);
+}
+.lettore-bottone:hover, .lettore-chiudi:hover { color: #FFFFFF; box-shadow: var(--bagliore-forte); }
+.lettore-bottone:disabled { opacity: .35; cursor: default; box-shadow: none; }
+.lettore-bottone:disabled:hover { color: var(--oro-chiaro); box-shadow: none; }
+.lettore-chiudi { position: absolute; z-index: 3; top: clamp(.8rem, 2.5vw, 1.6rem); right: clamp(.8rem, 2.5vw, 1.6rem); }
+@media (prefers-reduced-motion: no-preference) {
+  .lettore-bottone, .lettore-chiudi { transition: box-shadow .3s ease, color .3s ease; }
+}
+/* Con il movimento ridotto niente sfoglio: il JS cambia le pagine di
+   colpo, e per sicurezza qui si spengono tutte le animazioni. */
+@media (prefers-reduced-motion: reduce) {
+  .lettore-gira, .lettore-gira .lettore-faccia, .lettore-gira .lettore-faccia::before,
+  .lettore-gira .lettore-faccia::after, .lettore-pagina::before { animation: none; }
+}
+/* Sul telefono una pagina per volta: resta la destra, il foglio la copre
+   tutta e gira solo fino a mettersi di taglio (rivelando la nuova sotto),
+   con lo stesso sollevamento e gli stessi veli. */
+@media (max-width: 760px) {
+  .lettore-telaio {
+    --lettore-h: min(88svh, calc(100svh - 8rem), calc((100vw - 1.5rem) * 1.5418));
+    padding: 4.4rem .75rem 1rem; gap: .8rem;
+  }
+  .lettore-libro { aspect-ratio: 1100 / 1696; }
+  .lettore-libro::after { display: none; }
+  .lettore-sx { display: none; }
+  .lettore-dx { width: 100%; border-left: 1px solid rgba(227, 201, 143, .35); border-radius: var(--raggio-s); }
+  .lettore-sfoglia-indietro .lettore-dx::before { --lettore-dorso: 270deg; animation: lettore-ombra-sotto var(--lettore-durata, .95s) cubic-bezier(.4, .02, .2, 1) both; }
+  .lettore-foglio { left: 0; width: 100%; }
+  .lettore-faccia { border-radius: var(--raggio-s); border-width: 1px; }
+  .lettore-verso-avanti.lettore-gira { animation-name: lettore-sfoglio-avanti-mezzo; }
+  .lettore-verso-indietro.lettore-gira { animation-name: lettore-sfoglio-indietro-mezzo; }
+  .lettore-indicatore { min-width: 8rem; font-size: .8rem; }
+  .lettore-bottone { width: 2.9rem; height: 2.9rem; }
+}
+@keyframes lettore-sfoglio-avanti-mezzo {
+  0%   { transform: rotateY(0deg) skewY(0deg) scale(1); animation-timing-function: cubic-bezier(.4, .02, .75, .7); }
+  50%  { transform: rotateY(-45deg) skewY(-1.4deg) scale(.985); animation-timing-function: cubic-bezier(.25, .3, .2, 1); }
+  100% { transform: rotateY(-90deg) skewY(0deg) scale(1); }
+}
+@keyframes lettore-sfoglio-indietro-mezzo {
+  0%   { transform: rotateY(0deg) skewY(0deg) scale(1); animation-timing-function: cubic-bezier(.4, .02, .75, .7); }
+  50%  { transform: rotateY(45deg) skewY(1.4deg) scale(.985); animation-timing-function: cubic-bezier(.25, .3, .2, 1); }
+  100% { transform: rotateY(90deg) skewY(0deg) scale(1); }
 }

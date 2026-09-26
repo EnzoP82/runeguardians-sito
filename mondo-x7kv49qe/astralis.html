@@ -24,7 +24,7 @@
 <header class="barra-sito">
   <a class="marchio" href="../index.html">
     <img src="../assets/wordmark-barra.png" alt="RuneGuardians" width="736" height="211"></a>
-  <nav hidden><a href="index.html">Inizio</a><a href="astralis.html" class="qui">Astralis</a><a href="luoghi.html">Luoghi</a><a href="guardiani.html">Guardiani</a><a href="volti.html">Volti</a><a href="armature.html">Armature</a><a href="numero1.html">Numero 1</a></nav>
+  <span class="barra-area">Il Mondo · area riservata</span><nav hidden><a href="index.html">Il Mondo</a><a href="astralis.html" class="qui">Astralis</a><a href="luoghi.html">Luoghi</a><a href="guardiani.html">Guardiani</a><a href="volti.html">Volti</a><a href="armature.html">Armature</a><a href="numero1.html">Numero 1</a></nav>
   <a class="barra-cta bottone-primario" href="https://www.kickstarter.com/projects/1539499967/runeguardians-il-peso-del-ritorno-numero-1" target="_blank" rel="noopener"><span class="barra-cta-lungo">Sostieni su&nbsp;</span>Kickstarter</a>
   <button class="barra-burger" aria-label="Apri il menu" aria-expanded="false">☰</button>
 </header>
@@ -72,6 +72,9 @@
     var CHIAVE = "rg-mondo-viaggio";
     if (location.hash === "#ricomincia") { // per demo: riparte da capo
       try { localStorage.removeItem(CHIAVE); } catch (e) {}
+    }
+    if (location.hash === "#leggi") { // dalla newsletter: tutte le tappe aperte
+      try { localStorage.setItem(CHIAVE, JSON.stringify([0, 1, 2, 3, 4, 5, 6])); } catch (e) {}
     }
     var qui = "astralis.html";
     var idxQui = ORDINE.indexOf(qui);
