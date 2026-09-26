@@ -450,15 +450,10 @@ html.js .torna-su.visibile { opacity: 1; visibility: visible; transform: none; }
     radial-gradient(34rem 30rem at 72% 50%, rgba(53,182,232,.15), transparent 70%),
     radial-gradient(40rem 26rem at 22% 40%, rgba(227,201,143,.07), transparent 70%);
 }
-/* Il wordmark in cima all'hero: chi atterra da Kickstarter deve vedere il
-   nome del sito PRIMA del titolo. Il PNG ha molto vuoto trasparente sopra
-   e sotto le lettere (39,6% di lettering): i margini negativi se lo
-   mangiano, cosi' il wordmark non spinge i bottoni sotto la piega. */
-.hero-marchio {
-  display: block; width: clamp(10rem, 16vw, 13rem); height: auto;
-  margin: -1.9rem 0 -.9rem -.4rem;
-}
-.hero-testo h1 { margin-top: .2rem; }
+/* Nessun marchio nell'hero (richiesta Enzo 2026-09-26): il wordmark vive
+   solo nella barra, e il titolo e' il primo elemento della colonna di
+   testo — niente margine sopra, nessun vuoto appeso. */
+.hero-testo h1 { margin-top: 0; }
 .hero-testo .titolo-eco { margin-top: -.12em; }
 .hero-testo .occhiello {
   margin-top: .9rem;
@@ -526,7 +521,6 @@ html.js .torna-su.visibile { opacity: 1; visibility: visible; transform: none; }
     padding: 2.2rem 1.25rem 3rem;
   }
   .hero-arte { margin-top: .5rem; max-width: 20rem; }
-  .hero-marchio { width: 9rem; margin: -1.3rem 0 -.6rem -.3rem; }
 }
 
 /* ----------------------------------------------------------- numeri --- */
