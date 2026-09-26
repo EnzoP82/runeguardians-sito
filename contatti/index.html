@@ -14,39 +14,40 @@
 <link rel="icon" href="../assets/logo-lockup.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/rune.css">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Changa:wght@600;700;800&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/rune.css?v=5eff63f78e">
 <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 <header class="barra-sito">
   <a class="marchio" href="../index.html">
-    <img src="../assets/wordmark.png" alt="RuneGuardians"></a>
-  <button class="barra-burger" aria-label="Apri il menu" aria-expanded="false">☰</button>
+    <img src="../assets/wordmark-barra.png" alt="RuneGuardians" width="736" height="211"></a>
   <nav hidden><a href="../index.html">Home</a><a href="../il-mondo/">Il Mondo</a><a href="../galleria/">Galleria</a><a href="../lancio/">Il Lancio</a><a href="../contatti/" class="qui">Contatti</a></nav>
+  <a class="barra-cta bottone-primario" href="https://www.kickstarter.com/projects/1539499967/runeguardians-il-peso-del-ritorno-numero-1" target="_blank" rel="noopener"><span class="barra-cta-lungo">Sostieni su&nbsp;</span>Kickstarter</a>
+  <button class="barra-burger" aria-label="Apri il menu" aria-expanded="false">☰</button>
 </header>
-<style>
-  /* L'unica cosa che questa pagina ha bisogno di dichiarare da sola: lo
-     spazio sotto la barra sticky. Non c'e' un hero, quindi per il resto
-     bastano le classi condivise (.colonna-lettura, .scena). */
-  .contatti { padding: 6rem 1.5rem 5rem; }
-</style>
-<main>
-<section class="contatti scena">
+<main class="pagina-contatti">
+<section class="apertura-pagina contatti scena">
   <div class="colonna-lettura">
-    <h1>Contatti</h1>
+    <h1 class="titolo-pagina">Contatti</h1>
     <p>RuneGuardians è il lavoro di una persona sola. Le email le legge e le risponde Enzo Pellacani, quindi ci vuole un po' — ma arriva una risposta vera.</p>
-
+  </div>
+</section>
+<section class="contatti-voci scena" aria-label="Come scrivere">
+  <div class="card-luce">
     <h2>Per scrivere</h2>
     <p>Lettori, domande sul canone, proposte di collaborazione: <a href="mailto:runeguardians@ninefold-saga.com">runeguardians@ninefold-saga.com</a>.</p>
-
+  </div>
+  <div class="card-luce">
     <h2>Per la stampa</h2>
     <p>Le richieste della stampa vanno alla stessa casella. Un press kit completo — tavole ad alta risoluzione, materiale sul mondo, dati della campagna — è disponibile su richiesta.</p>
-
+  </div>
+  <div class="card-luce">
     <h2>Sui social</h2>
     <p>Instagram: <a href="https://www.instagram.com/rune.guardians/" target="_blank" rel="noopener">@rune.guardians</a></p>
     <p>X: <a href="https://x.com/Runessaga" target="_blank" rel="noopener">@Runessaga</a></p>
-
+  </div>
+  <div class="card-luce">
     <h2>La campagna</h2>
     <p>La campagna Kickstarter è aperta ora: <a href="https://www.kickstarter.com/projects/1539499967/runeguardians-il-peso-del-ritorno-numero-1" target="_blank" rel="noopener">sostienila qui</a>.</p>
   </div>
@@ -59,6 +60,7 @@
     <p class="firma">© 2026 Enzo Pellacani — RuneGuardians™ · ninefold-saga.com</p>
   </div>
 </footer>
-<script src="../assets/rune.js" defer></script>
+<a class="torna-su" href="#top" aria-label="Torna su"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 14.5V3.5M3.8 8.7L9 3.5l5.2 5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<script src="../assets/rune.js?v=7ab32db895" defer></script>
 </body>
 </html>

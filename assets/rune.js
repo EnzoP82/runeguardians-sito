@@ -1,5 +1,7 @@
 // Comportamento condiviso del sito RuneGuardians: il reveal delle sezioni,
-// le braci dell'abisso e il conto alla rovescia. Caricato con defer da ogni
+// le braci dell'abisso, il conto alla rovescia, lo scroll-telling, il
+// burger, i contatori della home, il «torna su» e il lightbox della
+// Galleria. Caricato con defer da ogni
 // pagina generata; il comportamento specifico di una singola pagina resta
 // nel suo <script> inline.
 
@@ -246,4 +248,182 @@ var fermo = matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
   largo.addEventListener("change", adegua);
   adegua();
+})();
+
+// I contatori della home (genera_sito._blocco_numeri): il numero finale e'
+// gia' nel markup, quindi senza JS e con prefers-reduced-motion si legge
+// quello e questo blocco esce subito. Altrimenti ogni cifra riparte da 0 e
+// sale fino a data-valore quando la sezione entra nello schermo, una volta
+// sola. Sulle pagine senza contatori non trova nulla ed esce: non deve mai
+// lanciare, o fermerebbe anche cio' che segue nel file.
+(function () {
+  var cifre = document.querySelectorAll(".numeri-cifra[data-valore]");
+  if (!cifre.length || fermo || !("IntersectionObserver" in window)) return;
+  var durata = 1600;
+  function conta(cella) {
+    var fine = parseInt(cella.dataset.valore, 10);
+    if (!(fine > 0)) return;
+    var inizio = null;
+    function passo(ora) {
+      if (inizio === null) inizio = ora;
+      var t = Math.min(1, (ora - inizio) / durata);
+      var dolce = 1 - Math.pow(1 - t, 3); // rallenta sull'arrivo
+      cella.textContent = String(Math.round(fine * dolce));
+      if (t < 1) requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+  }
+  var guardia = new IntersectionObserver(function (voci) {
+    voci.forEach(function (v) {
+      if (!v.isIntersecting) return;
+      guardia.unobserve(v.target);
+      conta(v.target);
+    });
+  }, { threshold: 0.6 });
+  cifre.forEach(function (cella) {
+    if (parseInt(cella.dataset.valore, 10) > 0) cella.textContent = "0";
+    guardia.observe(cella);
+  });
+})();
+
+// «Torna su»: compare dopo il primo schermo. Il link a #top funziona da
+// solo (anche senza JS, dove resta sempre visibile); qui si decide solo
+// quando mostrarlo. Assente su una pagina? Esce senza lanciare.
+(function () {
+  var su = document.querySelector(".torna-su");
+  if (!su) return;
+  var richiesto = false;
+  function adegua() {
+    richiesto = false;
+    su.classList.toggle("visibile", window.scrollY > window.innerHeight * 0.8);
+  }
+  addEventListener("scroll", function () {
+    if (richiesto) return;
+    richiesto = true;
+    requestAnimationFrame(adegua);
+  }, { passive: true });
+  adegua();
+})();
+
+// Il lightbox della Galleria (genera_sito._LIGHTBOX_HTML): un <dialog>
+// nativo, vuoto nel markup. L'elenco delle opere si costruisce SOLO dai
+// link .opera-apri delle card pubblicate — le card sigillate non hanno link,
+// quindi non possono entrarci: niente elenco a parte, niente JSON, niente
+// che nomini un'opera sigillata. Senza JS il link apre l'immagine grande.
+// Sulle pagine senza galleria (o senza <dialog>, o su un browser senza
+// showModal) esce subito e non lancia: i link restano link.
+(function () {
+  var dialogo = document.querySelector("dialog.lightbox");
+  var link = document.querySelectorAll(".galleria-griglia a.opera-apri");
+  if (!dialogo || !link.length || typeof dialogo.showModal !== "function") return;
+  var cornice = dialogo.querySelector(".lightbox-cornice");
+  var titolo = dialogo.querySelector(".lightbox-titolo");
+  var testo = dialogo.querySelector(".lightbox-testo");
+  var posizione = dialogo.querySelector(".lightbox-posizione");
+  var chiudi = dialogo.querySelector(".lightbox-chiudi");
+  var prima = dialogo.querySelector(".lightbox-prima");
+  var dopo = dialogo.querySelector(".lightbox-dopo");
+  if (!cornice || !titolo || !testo || !posizione || !chiudi || !prima || !dopo) return;
+
+  // Le opere, nell'ordine della griglia: file grande (href del link),
+  // miniatura gia' in cache (src dell'img), titolo e didascalia dalla card.
+  var opere = Array.prototype.map.call(link, function (a) {
+    var img = a.querySelector("img");
+    var card = a.closest(".opera-card");
+    var h3 = card && card.querySelector("figcaption h3");
+    var p = card && card.querySelector("figcaption p");
+    return {
+      link: a,
+      grande: a.getAttribute("href"),
+      mini: img ? img.getAttribute("src") : a.getAttribute("href"),
+      alt: img ? img.getAttribute("alt") : "",
+      titolo: h3 ? h3.textContent : "",
+      testo: p ? p.textContent : ""
+    };
+  });
+  var immagine = document.createElement("img");
+  immagine.decoding = "async";
+  cornice.appendChild(immagine);
+  var corrente = 0;
+  var aperturaDa = null;
+  var solaUna = opere.length < 2;
+  prima.hidden = solaUna;
+  dopo.hidden = solaUna;
+
+  function mostra(indice) {
+    corrente = (indice + opere.length) % opere.length;
+    var opera = opere[corrente];
+    // prima la miniatura (gia' scaricata dalla griglia), poi il file grande
+    // quando e' pronto — solo se nel frattempo non si e' gia' andati oltre
+    immagine.src = opera.mini;
+    immagine.alt = opera.alt;
+    var grande = new Image();
+    grande.onload = function () {
+      if (opere[corrente] === opera) immagine.src = opera.grande;
+    };
+    grande.src = opera.grande;
+    titolo.textContent = opera.titolo;
+    testo.textContent = opera.testo;
+    posizione.textContent = (corrente + 1) + " / " + opere.length;
+  }
+  function apri(indice) {
+    aperturaDa = opere[indice].link;
+    mostra(indice);
+    dialogo.showModal();
+    chiudi.focus();
+  }
+  opere.forEach(function (opera, indice) {
+    opera.link.addEventListener("click", function (e) {
+      // clic con modificatori (nuova scheda, ecc.): resta il link normale
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      apri(indice);
+    });
+  });
+  chiudi.addEventListener("click", function () { dialogo.close(); });
+  prima.addEventListener("click", function () { mostra(corrente - 1); });
+  dopo.addEventListener("click", function () { mostra(corrente + 1); });
+  // Esc lo gestisce il <dialog> da solo; qui le frecce e la trappola del
+  // Tab, che tiene il focus fra i bottoni del dialogo anche verso la barra
+  // del browser (showModal rende gia' inerte il resto della pagina).
+  dialogo.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft" && !solaUna) { e.preventDefault(); mostra(corrente - 1); }
+    else if (e.key === "ArrowRight" && !solaUna) { e.preventDefault(); mostra(corrente + 1); }
+    else if (e.key === "Tab") {
+      var fuochi = Array.prototype.filter.call(
+        dialogo.querySelectorAll("button"), function (b) { return !b.hidden; });
+      if (!fuochi.length) return;
+      var primo = fuochi[0], ultimo = fuochi[fuochi.length - 1];
+      if (e.shiftKey && document.activeElement === primo) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primo.focus(); }
+    }
+  });
+  // Il clic sul vuoto attorno all'opera chiude: il dialogo e' a tutto
+  // schermo, quindi "il vuoto" sono i contenitori, non l'immagine, i
+  // bottoni o la didascalia.
+  dialogo.addEventListener("click", function (e) {
+    var t = e.target;
+    if (t === dialogo || t.classList.contains("lightbox-telaio") ||
+        t.classList.contains("lightbox-figura") ||
+        t.classList.contains("lightbox-cornice")) dialogo.close();
+  });
+  // Alla chiusura (bottone, Esc, clic sul vuoto) il focus torna alla card
+  // da cui si era partiti.
+  dialogo.addEventListener("close", function () {
+    if (aperturaDa) aperturaDa.focus();
+    aperturaDa = null;
+  });
+  // Lo scorrimento col dito: un gesto orizzontale deciso cambia opera. Le
+  // frecce restano comunque visibili: lo swipe e' solo una comodita'.
+  var partenza = null;
+  dialogo.addEventListener("touchstart", function (e) {
+    if (e.touches.length === 1) partenza = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }, { passive: true });
+  dialogo.addEventListener("touchend", function (e) {
+    if (!partenza || solaUna || !e.changedTouches.length) { partenza = null; return; }
+    var dx = e.changedTouches[0].clientX - partenza.x;
+    var dy = e.changedTouches[0].clientY - partenza.y;
+    partenza = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) mostra(corrente + (dx < 0 ? 1 : -1));
+  }, { passive: true });
 })();
