@@ -469,6 +469,56 @@ html.js .torna-su.visibile { opacity: 1; visibility: visible; transform: none; }
   gap: 1rem;
 }
 
+/* Il box «Entra nel Mondo» dell'hero (login-in-home, 2026-10-03): un form
+   vero che posta al Worker del Mondo. Campi come quelli del form
+   d'iscrizione (.iscrizione input), bottone primario del sistema a tutta
+   larghezza, l'occhiolino come sulla pagina di login del Worker. */
+.accesso-mondo {
+  margin-top: 1.5rem;
+  max-width: 24rem;
+  padding: 1.1rem 1.3rem 1rem;
+  border-radius: var(--raggio-m);
+}
+.accesso-titolo {
+  font-size: var(--titolo-card);
+  margin-bottom: .5rem;
+}
+.accesso-modulo label {
+  display: block;
+  font-size: .95rem;
+  color: var(--carta-nota);
+  margin: .45rem 0 .25rem;
+}
+.accesso-modulo input {
+  width: 100%;
+  font: inherit; font-size: 1rem;
+  color: var(--carta);
+  background: rgba(7,11,18,.8);
+  border: 1px solid rgba(227,201,143,.4);
+  border-radius: var(--raggio-s);
+  padding: .6rem .95rem;
+}
+.accesso-modulo input::placeholder { color: var(--carta-nota); opacity: .8; }
+.accesso-modulo input:focus { border-color: var(--runa); outline: none;
+  box-shadow: 0 0 0 1px var(--runa), 0 0 20px rgba(53,182,232,.3); }
+/* Il riempimento automatico del browser (gestore password) dipinge i campi
+   di chiaro: si riporta il fondo scuro del sistema. */
+.accesso-modulo input:-webkit-autofill {
+  -webkit-text-fill-color: var(--carta); caret-color: var(--carta);
+  box-shadow: 0 0 0 100px #070B12 inset;
+}
+.campo-password { position: relative; }
+.campo-password input { padding-right: 3rem; }
+.occhio {
+  position: absolute; right: .4rem; top: 50%; transform: translateY(-50%);
+  width: 2.2rem; height: 2.2rem;
+  border: 0; background: none; cursor: pointer;
+  color: var(--oro); font-size: 1.2rem; line-height: 1;
+}
+.occhio:hover { color: var(--carta); }
+.accesso-modulo .bottone-primario { width: 100%; margin-top: .9rem; padding: .75rem 1.4rem; }
+.accesso-link { margin-top: .7rem; font-size: .92rem; line-height: 1.5; }
+
 /* width: 100% (non min(24rem, Nvw)) apposta: un valore legato al
    viewport non si accorge quando la sua COLONNA di griglia e' piu'
    stretta del viewport (successo fra 860 e ~950px: il pannello restava a

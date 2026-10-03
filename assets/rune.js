@@ -427,3 +427,20 @@ var fermo = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) mostra(corrente + (dx < 0 ? 1 : -1));
   }, { passive: true });
 })();
+
+// L'occhiolino della password nel box «Entra nel Mondo» della home: mostra
+// o nasconde cio' che si sta scrivendo. Stesso comportamento della pagina
+// di login del Worker (worker-mondo/src/pagine.ts). Un solo listener
+// delegato sul documento: sulle pagine senza [data-mostra-password] non fa
+// nulla e non lancia.
+document.addEventListener("click", function (e) {
+  var b = e.target.closest && e.target.closest("[data-mostra-password]");
+  if (!b) return;
+  var i = document.getElementById(b.getAttribute("data-mostra-password"));
+  if (!i) return;
+  var visibile = i.type === "text";
+  i.type = visibile ? "password" : "text";
+  b.setAttribute("aria-pressed", visibile ? "false" : "true");
+  b.setAttribute("aria-label", visibile ? "Mostra password" : "Nascondi password");
+  b.textContent = visibile ? "\u{1F441}" : "\u{1F576}";
+});
