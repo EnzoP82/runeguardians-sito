@@ -20,33 +20,65 @@ document.querySelectorAll(".scena, .runa-divisore").forEach(function (n) { occhi
 // ancora.
 var fermo = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// L'hero della home: ogni 6 secondi la classe "viva" passa alla slide
-// successiva, cosi' il CSS fa dissolvere l'una nell'altra. Ferma del tutto
-// con prefers-reduced-motion (resta la prima, statica: nessun timer parte)
-// e in pausa quando la scheda non e' visibile. Sulle pagine senza hero
-// (es. /lancio/) .hero-slide non c'e': esce subito, non lancia nulla.
+// L'hero della home: il quadro delle Armature scontornate (spec
+// 2026-10-04-hero-armature). Ogni --durata (rune.css, 4s) la classe "viva"
+// passa alla figura successiva e il CSS le dissolve l'una nell'altra; la
+// didascalia segue la figura (data-nome) e aria-hidden si sposta con
+// "viva". Le figure nascono senza src (data-src): si caricano una alla
+// volta, un passo prima di essere mostrate, e se la prossima non e'
+// ancora arrivata si aspetta il giro dopo; una figura che non arriva
+// affatto (404, "error") esce dal ciclo, cosi' non sfuma mai un quadro
+// vuoto (complete da solo non basta: e' true anche per un download
+// fallito, quindi si guarda anche naturalWidth). Ferma del tutto con
+// prefers-reduced-motion (resta la prima, statica: nessun timer parte) e
+// in pausa quando la scheda non e' visibile. Sulle pagine senza hero
+// (es. /lancio/) .hero-arte non c'e': esce subito, non lancia nulla.
 (function () {
-  var contenitore = document.querySelector(".hero-slide");
-  if (!contenitore) return;
-  var slide = contenitore.querySelectorAll(".slide");
-  if (slide.length < 2 || fermo) return;
+  var quadro = document.querySelector(".hero-arte");
+  if (!quadro) return;
+  var figure = Array.prototype.slice.call(quadro.querySelectorAll("img.armatura"));
+  var didascalia = document.querySelector(".hero-didascalia");
+  if (figure.length < 2 || fermo) return;
   var indice = 0;
   var ciclo = null;
+  function carica(k) {
+    var f = figure[k];
+    if (f.dataset.src && !f.getAttribute("src")) f.src = f.dataset.src;
+  }
+  function scarta(f) {
+    var k = figure.indexOf(f);
+    if (k < 0 || f.classList.contains("viva")) return;
+    figure.splice(k, 1);
+    if (k < indice) indice--;
+    f.remove();
+  }
+  figure.forEach(function (f) {
+    f.addEventListener("error", function () { scarta(f); });
+  });
   function avanti() {
-    slide[indice].classList.remove("viva");
-    slide[indice].setAttribute("aria-hidden", "true");
-    indice = (indice + 1) % slide.length;
-    slide[indice].classList.add("viva");
-    slide[indice].removeAttribute("aria-hidden");
+    if (figure.length < 2) return;
+    var prossima = (indice + 1) % figure.length;
+    carica(prossima);
+    var f = figure[prossima];
+    if (!f.complete || !f.naturalWidth) return;   // non ancora arrivata
+    figure[indice].classList.remove("viva");
+    figure[indice].setAttribute("aria-hidden", "true");
+    indice = prossima;
+    figure[indice].classList.add("viva");
+    figure[indice].removeAttribute("aria-hidden");
+    if (didascalia) didascalia.textContent = "Armatura \u00b7 " + figure[indice].dataset.nome;
+    carica((indice + 1) % figure.length);
   }
   function avvia() {
     if (ciclo) return;
-    ciclo = setInterval(avanti, 6000);
+    var durata = parseFloat(getComputedStyle(quadro).getPropertyValue("--durata")) || 4;
+    ciclo = setInterval(avanti, durata * 1000);
   }
   function ferma() {
     clearInterval(ciclo);
     ciclo = null;
   }
+  carica(1);
   if (!document.hidden) avvia();
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) ferma(); else avvia();

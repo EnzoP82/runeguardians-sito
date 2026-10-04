@@ -422,33 +422,33 @@ html.js .torna-su.visibile { opacity: 1; visibility: visible; transform: none; }
 }
 
 /* -------------------------------------------------------- hero home --- */
-/* La home: titolo di display e azioni a sinistra, a destra un poster con i
-   Cinque Eredi in armatura di Fusione che si dissolvono l'uno nell'altro.
-   I poster sono ritagli 4:5 delle tavole d'evoluzione (genera_sito,
-   SLIDE_HERO: una figura intera dalla fascia «Fusione»), e il pannello ha
-   lo STESSO rapporto: "cover" riempie la cornice senza ritagliare altro.
-   L'altezza e' il viewport MENO la barra, cosi' tutto l'hero — bottoni
-   compresi — sta nel primo schermo. */
+/* La home (anteprima approvata da Enzo il 2026-10-04, spec
+   docs/specs/2026-10-04-hero-armature-design.md): due colonne. A sinistra
+   titolo, azioni e box di login; a destra (--colonna) il quadro delle
+   Armature scontornate (genera_armature_hero.py) che si dissolvono l'una
+   nell'altra, con un alone dorato dietro e un'ombra a terra. I parametri
+   sono quelli bloccati nell'anteprima: rune.js legge --durata da qui.
+   L'altezza e' il viewport MENO la barra, cosi' tutto l'hero sta nel
+   primo schermo. */
 .hero-home {
+  --durata: 4s; --dissolvenza: 1.4s; --colonna: 60%; --margine-dx: 12%;
+  --altezza: 100%; --alone: .35; --ombra: 14%;
   position: relative;
   min-height: calc(100svh - var(--altezza-barra));
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-columns: minmax(0, 1fr) var(--colonna);
   align-items: center;
-  gap: clamp(2rem, 5vw, 4.5rem);
-  /* a tutta larghezza, con la colonna da 78rem ricavata dal padding: cosi'
-     gli aloni di ::before coprono l'intero schermo senza essere tagliati ai
-     bordi della colonna e senza sforare (niente 100vw, che conta anche la
-     barra di scorrimento e fa scorrere la pagina in orizzontale) */
-  padding: 2.5rem max(1.5rem, calc((100% - 78rem) / 2)) 3rem;
+  /* clip, non hidden: hidden farebbe dell'hero il contenitore di scorrimento
+     e il quadro sticky qui sotto non si fermerebbe piu' sotto la barra */
+  overflow: clip;
   isolation: isolate;
 }
-/* L'aura dietro al poster: un alone runico e uno dorato, niente immagine. */
-.hero-home::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(34rem 30rem at 72% 50%, rgba(53,182,232,.15), transparent 70%),
-    radial-gradient(40rem 26rem at 22% 40%, rgba(227,201,143,.07), transparent 70%);
+.hero-testo {
+  position: relative; z-index: 2;
+  max-width: 44rem;
+  /* a sinistra il bordo della colonna da 78rem del sito, mai meno di 4rem */
+  padding: 4rem 2.5rem 4rem max(4rem, calc((100vw - 78rem) / 2));
+  text-shadow: 0 2px 14px rgba(7,11,18,.9);
 }
 /* Nessun marchio nell'hero (richiesta Enzo 2026-09-26): il wordmark vive
    solo nella barra, e il titolo e' il primo elemento della colonna di
@@ -519,58 +519,61 @@ html.js .torna-su.visibile { opacity: 1; visibility: visible; transform: none; }
 .accesso-modulo .bottone-primario { width: 100%; margin-top: .9rem; padding: .75rem 1.4rem; }
 .accesso-link { margin-top: .7rem; font-size: .92rem; line-height: 1.5; }
 
-/* width: 100% (non min(24rem, Nvw)) apposta: un valore legato al
-   viewport non si accorge quando la sua COLONNA di griglia e' piu'
-   stretta del viewport (successo fra 860 e ~950px: il pannello restava a
-   384px fissi mentre la colonna si stringeva, e la pagina scrollava in
-   orizzontale). Il max-width resta il tetto sui viewport larghi. */
-.hero-arte { justify-self: center; width: 100%; max-width: 26rem; }
-.hero-slide {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: var(--raggio-l);
-  border: 1.5px solid transparent;
-  background: linear-gradient(var(--fondale), var(--fondale)) padding-box,
-              var(--grad-bordo) border-box;
-  box-shadow: -14px 0 50px rgba(227,201,143,.2), 14px 0 50px rgba(53,182,232,.3),
-              0 30px 70px rgba(0,0,0,.6);
+/* Il quadro: le figure sono sovrapposte, posate a terra (bottom) e
+   centrate nello spazio a sinistra del margine destro. direction: rtl e'
+   il trucco dell'anteprima: con left e right fissati e larghezza "auto"
+   (dettata dall'altezza), in rtl il vincolo che cede e' left, quindi una
+   figura piu' larga dello spazio resta agganciata a destra e sborda verso
+   il testo invece che fuori schermo. */
+/* Il quadro e' alto quanto il primo schermo (viewport meno barra), non
+   quanto la colonna di testo: col box di login il testo e' piu' alto dello
+   schermo, e la figura non deve crescere oltre la piega. Resta sticky sotto
+   la barra mentre si scorre il resto del testo. */
+.hero-arte {
+  position: sticky; top: var(--altezza-barra); align-self: start;
+  height: calc(100svh - var(--altezza-barra)); direction: rtl;
 }
-.hero-slide .slide {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  border-radius: calc(var(--raggio-l) - 2px);
-  opacity: 0;
-  transition: opacity 1.4s ease;
+.hero-arte::before {
+  content: ""; position: absolute; left: 0; right: var(--margine-dx); top: 10%; bottom: 8%;
+  margin: auto; width: 70%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(201,163,90,var(--alone)), rgba(201,163,90,0) 70%);
+  filter: blur(30px);
 }
-.hero-slide .slide.viva { opacity: 1; }
-/* La base del poster sfuma nell'abisso: nasconde l'attacco del fregio
-   della tavola d'evoluzione e fa "posare" la figura. */
-.hero-slide::after {
-  content: ""; position: absolute; inset: auto 0 0 0; height: 22%; z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent, rgba(11,19,30,.85));
+.hero-arte::after {
+  content: ""; position: absolute; left: 0; right: var(--margine-dx);
+  bottom: calc((100% - var(--altezza)) / 2 - 2%);
+  margin: auto; width: 55%; height: var(--ombra); border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.6), rgba(0,0,0,0));
 }
-@media (prefers-reduced-motion: no-preference) {
-  /* Il respiro: lo zoom lento della slide viva. Si riavvia da solo ogni
-     volta che il JS sposta la classe "viva" su un'altra immagine. */
-  .hero-slide .slide.viva { animation: hero-respiro 12s ease-in-out forwards; }
-  @keyframes hero-respiro {
-    from { transform: scale(1); }
-    to   { transform: scale(1.06); }
-  }
+.hero-arte img {
+  position: absolute; bottom: calc((100% - var(--altezza)) / 2);
+  left: 0; right: var(--margine-dx); margin: 0 auto;
+  height: calc(var(--altezza) * var(--scala, 1)); width: auto; max-width: none;
+  object-fit: contain;
+  opacity: 0; transition: opacity var(--dissolvenza) ease-in-out;
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.55));
+}
+.hero-arte img.viva { opacity: 1; }
+/* l'eccezione dell'anteprima (genera_sito.ECCEZIONI_ARMATURE): appesa in alto */
+.hero-arte img.in-alto { bottom: auto; top: calc((100% - var(--altezza)) / 2); }
+.hero-didascalia {
+  position: absolute; right: 28px; bottom: 22px; z-index: 3; direction: ltr;
+  font-family: var(--font-display); text-transform: uppercase;
+  letter-spacing: .12em; font-size: .78rem; color: var(--carta-nota);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-arte img { transition: none; }
 }
 /* Stessa soglia della barra di navigazione: sopra i 760px la barra e' gia'
    desktop, quindi anche l'hero deve esserlo — altrimenti fra 761 e 860px
-   si vedeva la barra desktop sopra un hero impilato da telefono. */
+   si vedeva la barra desktop sopra un hero impilato da telefono. Sul
+   telefono il quadro sale sopra il testo, alto 70vh, senza margine destro. */
 @media (max-width: 760px) {
-  .hero-home {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding: 2.2rem 1.25rem 3rem;
-  }
-  .hero-arte { margin-top: .5rem; max-width: 20rem; }
+  .hero-home { grid-template-columns: 1fr; min-height: 0; }
+  .hero-arte { order: -1; height: 70vh; min-height: 380px; position: relative; top: auto; }
+  .hero-arte img, .hero-arte::before, .hero-arte::after { right: 0; }
+  .hero-arte img { max-width: 100%; }
+  .hero-testo { padding: .5rem 1.25rem 3rem; }
 }
 
 /* ----------------------------------------------------------- numeri --- */
